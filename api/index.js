@@ -1,55 +1,39 @@
-const SignalRJS = require('signalrjs');
-const signalR = SignalRJS();
-
-const express = require('express')
-
-//const client = new signalr.Client('http://localhost:8080/signalr', ['testHub'])
-
-const app = express()
-app.use(signalR.createListener())
-const port = 3000
-
-//api
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const socket = require('socket.io');
 
 
-//signalr
-signalR.on('CONNECTED',function(){
-    console.log('connected');
-    setInterval(function () {
-        signalR.send({time:new Date()});
-    },1000)
+var io = socket(server, {
+  pingInterval: 10000,
+  pingTimeout: 5000
 });
 
-/*
-// custom headers
-client.headers['Token'] = 'Tds2dsJk'
-
-// set timeout for sending message
-client.callTimeout = 10000 // 10's, default 5000
-
-// set delay time for reconecting
-client.reconnectDelayTime = 2000 // 2's, default 5000
-
-// set timeout for connect
-client.requestTimeout = 2000 // 2's, default 5000
+io.use((socket, next) => {
+  if (socket.handshake.query.token === "UNITY") {
+      next();
+  } else {
+      next(new Error("Authentication error"));
+  }
+});
 
 
-client.on('connected', () => {
-    console.log('SignalR client connected.')
-})
-client.on('reconnecting', (retryCount) => {
-    console.log(`SignalR client reconnecting(${retryCount}).`)
-})
-client.on('disconnected', (reason) => {
-    console.log(`SignalR client disconnected(${reason}).`)
-})
-client.on('error', (error) => {
-    console.log(`SignalR client connect error: ${error.code}.`)
-})*/
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+
+  socket.on('move', (data) => {
+    console.log('move', data);
+    //socket.emit('hello', {date: new Date().getTime(), data: data});
+  });
+});
+
+server.listen(3000, () => {
+  console.log('listening on *:3000');
+});
