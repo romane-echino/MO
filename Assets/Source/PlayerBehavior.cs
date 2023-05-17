@@ -5,6 +5,16 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     public Vector2 speed = new Vector2(10, 10);
+
+    [Header("Animation")]
+    public float DisplacementLimitToMove = 0.1f;
+
+    [Header("References")]
+    [SerializeField]
+    private Animator animator;
+
+    private bool lastDirAnimationLeft = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +29,17 @@ public class PlayerBehavior : MonoBehaviour
         Vector3 movement = new Vector3(speed.x * x, speed.y * y, 0);
         movement *= Time.deltaTime;
         transform.Translate(movement);
+
+        // Animation update
+        bool onMovement = Mathf.Abs(movement.x) > DisplacementLimitToMove || Mathf.Abs(movement.y) > DisplacementLimitToMove;
+        animator.SetBool("Move", onMovement);
+
+        bool leftDir = movement.x < 0f;
+        if(leftDir != lastDirAnimationLeft && onMovement) // Just to be sure to not change the facing when not moving
+        {
+            animator.SetBool("DirectionLeft", leftDir);
+            lastDirAnimationLeft = leftDir;
+        }
     }
 
     void FixedUpdate()
