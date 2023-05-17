@@ -8,6 +8,7 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviour
 {
     public SocketIOUnity socket;
+    public double Ping = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class NetworkManager : MonoBehaviour
             ,
             Transport = SocketIOClient.Transport.TransportProtocol.WebSocket
         });
+
         socket.JsonSerializer = new NewtonsoftJsonSerializer();
 
         ///// reserved socketio events
@@ -33,11 +35,10 @@ public class NetworkManager : MonoBehaviour
         };
         socket.OnPing += (sender, e) =>
         {
-            Debug.Log("Ping");
         };
         socket.OnPong += (sender, e) =>
         {
-            Debug.Log("Pong: " + e.TotalMilliseconds);
+            this.Ping = e.TotalMilliseconds;
         };
         socket.OnDisconnected += (sender, e) =>
         {
@@ -49,20 +50,26 @@ public class NetworkManager : MonoBehaviour
         };
 
 
+        socket.On("connection", (data) => {
+            Debug.Log(data.ToString());
+        });
+
+
         Debug.Log("Connecting...");
         socket.Connect();
     }
 
     public void EmitMovement(PlayerMovement movement)
     {
-        Debug.Log("move!");
-        socket.Emit("move", movement);
+        var json = JsonUtility.ToJson(movement);
+        Debug.Log("move!" + json);
+        socket.EmitAsync("move", json);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnApplicationQuit()
