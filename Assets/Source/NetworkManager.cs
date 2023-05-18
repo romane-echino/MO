@@ -74,9 +74,10 @@ public class NetworkManager : MonoBehaviour
         socket.On("remotemove", (data) =>
         {
             Debug.Log("Remote move!" + data);
-            var remoteData = data.GetValue<RemotePlayerMovement>();
+            var remoteData = data.GetValue<PlayerMovement>();
 
-            Debug.Log("Remote move" + remoteData.data.id);
+            Debug.Log("Remote move" + remoteData.id);
+            GameManager.Instance.Players.MoveRemote(remoteData);
         });
 
 

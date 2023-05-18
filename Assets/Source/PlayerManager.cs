@@ -31,9 +31,9 @@ public class PlayerManager : MonoBehaviour
         remotePlayers.Add(id, new PlayerMovement(Vector3.zero, id));
     }
 
-    public void MoveRemote(RemotePlayerMovement remoteData)
+    public void MoveRemote(PlayerMovement remoteData)
     {
-        remotePlayers[remoteData.data.id] = remoteData.data;
+        remotePlayers[remoteData.id] = remoteData;
     }
 
     public PlayerMovement GetPlayerPosition(string id){
