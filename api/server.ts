@@ -4,7 +4,7 @@ import http from 'http'
 import socketIO from 'socket.io'
 import { v4 as uuidv4 } from 'uuid';
 
-const port: number = 3000
+const port: number = 3000;
 
 interface position {
     x: number;
