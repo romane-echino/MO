@@ -36,7 +36,7 @@ class App {
         this.port = port
 
         const app = express()
-        app.use(express.static(path.join(__dirname, '../public')))
+        app.use(express.static(path.join(__dirname, './public')))
 
         app.get('/users', (req, res) => {
             console.log('retrieving users list')
