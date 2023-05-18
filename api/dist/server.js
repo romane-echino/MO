@@ -14,7 +14,12 @@ class App {
         this._users = {};
         this.port = port;
         const app = (0, express_1.default)();
-        app.use(express_1.default.static(path_1.default.join(__dirname, '../client')));
+        app.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
+        app.get('/users', (req, res) => {
+            console.log('retrieving users list');
+            return res.json(this._users);
+        });
+        console.log('path', path_1.default.join(__dirname, 'public'));
         this.server = new http_1.default.Server(app);
         this.io = new socket_io_1.default.Server(this.server, {
             pingInterval: 10000,

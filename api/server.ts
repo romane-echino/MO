@@ -36,7 +36,13 @@ class App {
         this.port = port
 
         const app = express()
-        app.use(express.static(path.join(__dirname, '../client')))
+        app.use(express.static(path.join(__dirname, '../public')))
+
+        app.get('/users', (req, res) => {
+            console.log('retrieving users list')
+            return res.json(this._users);
+        })
+        console.log('path', path.join(__dirname, 'public'))
 
         this.server = new http.Server(app)
         this.io = new socketIO.Server(this.server, {

@@ -33,10 +33,17 @@ public class PlayerManager : MonoBehaviour
 
     public void MoveRemote(PlayerMovement remoteData)
     {
+        //todo remove hack for debug
+        if (!remotePlayers.ContainsKey(remoteData.id))
+        {
+            AddRemotePlayer(remoteData.id);
+        }
+
         remotePlayers[remoteData.id] = remoteData;
     }
 
-    public PlayerMovement GetPlayerPosition(string id){
+    public PlayerMovement GetPlayerPosition(string id)
+    {
         return remotePlayers[id];
     }
 
