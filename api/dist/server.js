@@ -43,7 +43,7 @@ class App {
             }, 1000);
             socket.on('move', (d) => {
                 let data = JSON.parse(d);
-                console.log('move', data);
+                //console.log('move', data);
                 this._users[socket.id].lastPosition.x = data.x;
                 this._users[socket.id].lastPosition.y = data.y;
                 //socket.emit('hello', {date: new Date().getTime(), data: data});

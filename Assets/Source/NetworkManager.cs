@@ -77,7 +77,11 @@ public class NetworkManager : MonoBehaviour
             var remoteData = data.GetValue<PlayerMovement>();
 
             Debug.Log("Remote move" + remoteData.id);
-            GameManager.Instance.Players.MoveRemote(remoteData);
+            
+            Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.MoveRemote(remoteData);
+            });
         });
 
 

@@ -6,7 +6,7 @@ public class LocalPlayerBehavior : MonoBehaviour
 {
 
     private CharacterBehavior _character;
-    private float _interval = 0.5f;
+    private float _interval = 0.1f;
     private float _nextTime = 0;
 
     private Vector3 _storedMovement = Vector3.zero;
