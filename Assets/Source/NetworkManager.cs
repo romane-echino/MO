@@ -9,6 +9,7 @@ public class NetworkManager : MonoBehaviour
 {
     public SocketIOUnity socket;
     public double Ping = 0;
+    public string playerId;
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +51,32 @@ public class NetworkManager : MonoBehaviour
         };
 
 
-        socket.On("connection", (data) => {
-            Debug.Log(data.ToString());
+        socket.On("connection", (data) =>
+        {
+            Debug.Log("Connection success");
+            Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.AddLocalPlayer(data.GetValue<string>());
+            });
+
+            this.playerId = data.GetValue<string>();
+        });
+
+        socket.On("remoteconnection", (data) =>
+        {
+            Debug.Log("Remote Player connected");
+            Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.AddRemotePlayer(data.GetValue<string>());
+            });
+        });
+
+        socket.On("remotemove", (data) =>
+        {
+            Debug.Log("Remote move!" + data);
+            var remoteData = data.GetValue<RemotePlayerMovement>();
+
+            Debug.Log("Remote move" + remoteData.data.id);
         });
 
 
@@ -59,9 +84,9 @@ public class NetworkManager : MonoBehaviour
         socket.Connect();
     }
 
-    public void EmitMovement(PlayerMovement movement)
+    public void EmitMovement(Vector3 position)
     {
-        var json = JsonUtility.ToJson(movement);
+        var json = JsonUtility.ToJson(new PlayerMovement(position, this.playerId));
         Debug.Log("move!" + json);
         socket.EmitAsync("move", json);
     }
@@ -75,5 +100,38 @@ public class NetworkManager : MonoBehaviour
     void OnApplicationQuit()
     {
         socket.Disconnect();
+    }
+}
+
+[System.Serializable]
+public class PlayerMovement
+{
+    public int x;
+    public int y;
+    public int rotation;
+    public string id;
+
+    public PlayerMovement(Vector3 x_y_rotation, string id)
+    {
+        this.x = Mathf.FloorToInt(x_y_rotation.x * 100f);
+        this.y = Mathf.FloorToInt(x_y_rotation.y * 100f);
+        this.rotation = Mathf.FloorToInt(x_y_rotation.z * 100f);
+
+        this.id = id;
+    }
+}
+
+
+
+[System.Serializable]
+public class RemotePlayerMovement
+{
+    public DateTime date;
+    public PlayerMovement data;
+
+    public RemotePlayerMovement(DateTime date, PlayerMovement data)
+    {
+        this.date = date;
+        this.data = data;
     }
 }

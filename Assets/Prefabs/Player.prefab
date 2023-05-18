@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 385388713246651008}
+  - component: {fileID: -8494350594157549738}
   - component: {fileID: 385388713246651009}
+  - component: {fileID: -5143746616663442588}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -34,6 +36,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8494350594157549738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385388713246651022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a086711844f3a74bbba128fbee3de3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &385388713246651009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,12 +57,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 385388713246651022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a1ce7fdc34d28438bfb4ecdd243ff2, type: 3}
+  m_Script: {fileID: 11500000, guid: dcfabe9e14895f94f980ad342c103457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 50, y: 50}
+  speed: {x: 10, y: 10}
   DisplacementLimitToMove: 0.01
   animator: {fileID: 4081922895564592370}
+--- !u!114 &-5143746616663442588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385388713246651022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3fdc920f7952c4c8814672c3d18824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &385388713525041961
 GameObject:
   m_ObjectHideFlags: 0

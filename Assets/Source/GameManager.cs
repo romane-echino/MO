@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public NetworkManager Network { get; private set; }
+public PlayerManager Players { get; private set; }
 
     private GameObject DebugUI { get; set; }
     private bool showDebugUI = false;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         Network = GetComponentInChildren<NetworkManager>();
+        Players = GetComponentInChildren<PlayerManager>();
+
         var debugUITransform = transform.Find("DebugUI");
         DebugUI = debugUITransform.gameObject;
         var go = debugUITransform.Find("Ping");
