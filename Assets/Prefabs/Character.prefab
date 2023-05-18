@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 3286641932188212129}
   - component: {fileID: 379932030794198651}
   m_Layer: 0
-  m_Name: ForeArm
+  m_Name: ForearmR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 3767310480795446181}
   - component: {fileID: 7779809952654858088}
   m_Layer: 0
-  m_Name: ForeArm
+  m_Name: ForearmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
