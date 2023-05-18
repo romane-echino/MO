@@ -5,9 +5,50 @@ using UnityEngine;
 
 namespace MO.Character.BodyAspect
 {
-
     public static class CharacterBodyPartTools
     {
+
+        [MenuItem("Tool/Test")]
+        public static void Test()
+        {
+            if (Selection.activeObject is Texture2D)
+            {
+
+                if (Selection.assetGUIDs.Length > 0)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(Selection.assetGUIDs[0]);
+                    var sprites = AssetDatabase.LoadAllAssetRepresentationsAtPath(path);
+
+                    CharacterBodyPartData data = ScriptableObject.CreateInstance<CharacterBodyPartData>();
+
+                    foreach (var bodyPart in (BodyPartType[])Enum.GetValues(typeof(BodyPartType)))
+                    {
+                        string spriteBodyPartName = GetBodyPartSpriteName(bodyPart);
+                        if (string.IsNullOrWhiteSpace(spriteBodyPartName))
+                        {
+                            Debug.LogError($"{bodyPart} name is not valid : \"{spriteBodyPartName}\"");
+                            continue;
+                        }
+
+                        foreach (var sprite in sprites)
+                        {
+                            if(sprite.name == spriteBodyPartName)
+                            {
+                                data.AddPartSprite(bodyPart, sprite as Sprite);
+                                break;
+                            }
+                        }
+                    }
+
+                    string name = AssetDatabase.GenerateUniqueAssetPath("Assets/BodyPartData.asset");
+                    AssetDatabase.CreateAsset(data, name);
+                    AssetDatabase.SaveAssets();
+
+                }
+            }
+        }
+
+
         [MenuItem("Tool/MO/Character/Create body part data from selection")]
         public static void CreateCharacterBodyPartFromSelection()
         {
@@ -59,6 +100,33 @@ namespace MO.Character.BodyAspect
             {
                 default:
                     return bodyPart.ToString();
+            }
+        }
+
+        private static string GetBodyPartSpriteName(BodyPartType bodyPart)
+        {
+            switch (bodyPart)
+            {
+                case BodyPartType.Head:
+                    return "Head";
+                case BodyPartType.ArmL:
+                    return "Arm";
+                case BodyPartType.ArmR:
+                    return "Arm";
+                case BodyPartType.ForearmL:
+                    return "Forearm";
+                case BodyPartType.ForearmR:
+                    return "Forearm";
+                case BodyPartType.UpperBody:
+                    return "UpperBody";
+                case BodyPartType.LowerBody:
+                    return "LowerBody";
+                case BodyPartType.LegL:
+                    return "Leg";
+                case BodyPartType.LegR:
+                    return "Leg";
+                default:
+                    throw new NotImplementedException();
             }
         }
 

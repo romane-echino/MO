@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5657768886281723361}
   - component: {fileID: 7768993982901963107}
   m_Layer: 0
-  m_Name: Eye (1)
+  m_Name: EyeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1071,6 +1071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9093634228782779009}
   - component: {fileID: 2639260659950746367}
+  - component: {fileID: 827087056189864772}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1116,6 +1117,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &827087056189864772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795709019435342375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff93cafc1ddfb64ea33eec42a109cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Texture: {fileID: 2800000, guid: d3aba6606416e104888cd49bb8c43eb7, type: 3}
 --- !u!1 &7280856935170340470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1141,7 @@ GameObject:
   - component: {fileID: 4919649421946508111}
   - component: {fileID: 5029410208167310566}
   m_Layer: 0
-  m_Name: Eye
+  m_Name: EyeL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

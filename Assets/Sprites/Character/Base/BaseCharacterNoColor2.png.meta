@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f2ac2d5c586fe4549ba5c3a6b540d313
+guid: 9fb0704c8b951bd46861b136b670d169
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 2
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -112,21 +112,21 @@ TextureImporter:
         y: 360
         width: 218
         height: 152
-      alignment: 9
-      pivot: {x: 0.45966178, y: 0.006018187}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bf9d7d51e7c8bf4892b7df9e8c43baa
-      internalID: 1720140363
+      spriteID: d68e847bd0398af45b3677a9979ac6e1
+      internalID: -775854476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseCharacter_1
+      name: BaseCharacterNoColor2_1
       rect:
         serializedVersion: 2
         x: 232
@@ -134,20 +134,20 @@ TextureImporter:
         width: 112
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12a52975f0c88bb4582564ddfea2cd64
-      internalID: -325334436
+      spriteID: 12dcd90d74a51e94ba1f7e7d60009e03
+      internalID: 444767923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseCharacter_2
+      name: BaseCharacterNoColor2_2
       rect:
         serializedVersion: 2
         x: 260
@@ -155,20 +155,20 @@ TextureImporter:
         width: 48
         height: 20
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21479239b63393341aa13e6afae919c1
-      internalID: 1798811155
+      spriteID: c4422f03de597d14fb6246ffc78e7f0c
+      internalID: -1037047002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpperBody
+      name: BaseCharacterNoColor2_3
       rect:
         serializedVersion: 2
         x: 232
@@ -176,83 +176,62 @@ TextureImporter:
         width: 112
         height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8be079c7283e6b478555b0c32f472a0
-      internalID: 2024251742
+      spriteID: 36a0756b75db8694bab8ffb2fd31ab1b
+      internalID: -971781728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Arm
+      name: BaseCharacterNoColor2_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 239
+        y: 238
         width: 54
         height: 100
-      alignment: 9
-      pivot: {x: 0.51252687, y: 0.79087067}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3816f61acb37822489f3d9e3d9770707
-      internalID: -1456782586
+      spriteID: 4084fa2778f3b6242aa69817b545ce07
+      internalID: -830251414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forearm
+      name: BaseCharacterNoColor2_5
       rect:
         serializedVersion: 2
         x: 66
         y: 238
         width: 54
         height: 100
-      alignment: 9
-      pivot: {x: 0.48747367, y: 0.79087067}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b34175544bfcf343ac7558f956c4194
-      internalID: 939684232
+      spriteID: de35d85162b17ce478529b974f71ede0
+      internalID: -225960608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Leg
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 296
-        width: 50
-        height: 54
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9326d89aca8c74e4887f77b868d1006d
-      internalID: 666851615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LowerBody
+      name: BaseCharacterNoColor2_6
       rect:
         serializedVersion: 2
         x: 226
@@ -260,41 +239,41 @@ TextureImporter:
         width: 124
         height: 52
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85a798d8332a3554890b0ddc201f2055
-      internalID: 193218665
+      spriteID: 0c3e4911973e00548ab16d13c74321d4
+      internalID: 46029077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseCharacter_8
+      name: BaseCharacterNoColor2_7
       rect:
         serializedVersion: 2
         x: 134
-        y: 244
+        y: 238
         width: 50
-        height: 38
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f53642b81db7120489149f708ec2fbda
-      internalID: -805264654
+      spriteID: e9bfc6a50b963804ab9991aafffbf288
+      internalID: 331002187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Mouth
+      name: BaseCharacterNoColor2_8
       rect:
         serializedVersion: 2
         x: 206
@@ -302,20 +281,20 @@ TextureImporter:
         width: 28
         height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8442fd84e544bcb4c965bc8cc599b67a
-      internalID: 261721382
+      spriteID: 6864a3f3b4d669b42a615486836a0b21
+      internalID: 1408290367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye
+      name: BaseCharacterNoColor2_9
       rect:
         serializedVersion: 2
         x: 256
@@ -323,20 +302,20 @@ TextureImporter:
         width: 16
         height: 24
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a97f2c32125b97c4cafd36074f768860
-      internalID: -382457269
+      spriteID: f0ddd802c7b19c64fb6676581ff57f40
+      internalID: 964439917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BaseCharacter_11
+      name: BaseCharacterNoColor2_10
       rect:
         serializedVersion: 2
         x: 306
@@ -344,14 +323,14 @@ TextureImporter:
         width: 38
         height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7279a593aa49334b87174ac69a296d6
-      internalID: -1111498296
+      spriteID: 2583e13ef3a470b429a3686123e20647
+      internalID: -2122619499
       vertices: []
       indices: 
       edges: []
@@ -367,18 +346,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Arm: -1456782586
-      BaseCharacter_1: -325334436
-      BaseCharacter_11: -1111498296
-      BaseCharacter_2: 1798811155
-      BaseCharacter_8: -805264654
-      Eye: -382457269
-      Forearm: 939684232
-      Head: 1720140363
-      Leg: 666851615
-      LowerBody: 193218665
-      Mouth: 261721382
-      UpperBody: 2024251742
+      BaseCharacterNoColor2_1: 444767923
+      BaseCharacterNoColor2_10: -2122619499
+      BaseCharacterNoColor2_2: -1037047002
+      BaseCharacterNoColor2_3: -971781728
+      BaseCharacterNoColor2_4: -830251414
+      BaseCharacterNoColor2_5: -225960608
+      BaseCharacterNoColor2_6: 46029077
+      BaseCharacterNoColor2_7: 331002187
+      BaseCharacterNoColor2_8: 1408290367
+      BaseCharacterNoColor2_9: 964439917
+      Head: -775854476
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
