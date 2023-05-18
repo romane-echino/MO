@@ -7,14 +7,16 @@ public class PlayerManager : MonoBehaviour
     public GameObject PlayerPrefab;
     private Transform playersTransform;
 
-    private Dictionary<string, PlayerMovement> remotePlayers;
+    private Dictionary<string, PlayerMovement> remotePlayersData;
+    private Dictionary<string, GameObject> remotePlayersGameObjects;
 
     void Awake()
     {
         var players = new GameObject("Players");
         this.playersTransform = players.transform;
 
-        remotePlayers = new Dictionary<string, PlayerMovement>();
+        remotePlayersData = new Dictionary<string, PlayerMovement>();
+        remotePlayersGameObjects = new Dictionary<string, GameObject>();
     }
 
     public void AddLocalPlayer(string id)
@@ -28,23 +30,38 @@ public class PlayerManager : MonoBehaviour
     {
         var player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity, playersTransform);
         player.GetComponent<CharacterBehavior>().Init(id);
-        remotePlayers.Add(id, new PlayerMovement(Vector3.zero, id));
+        remotePlayersData.Add(id, new PlayerMovement(Vector3.zero, id));
+        remotePlayersGameObjects.Add(id, player);
+    }
+
+    public void RemoveRemotePlayer(string id)
+    {
+        if (remotePlayersData.ContainsKey(id))
+        {
+            remotePlayersData.Remove(id);
+        }
+
+        if (remotePlayersGameObjects.ContainsKey(id))
+        {
+            Destroy(remotePlayersGameObjects[id]);
+            remotePlayersGameObjects.Remove(id);
+        }
     }
 
     public void MoveRemote(PlayerMovement remoteData)
     {
         //todo remove hack for debug
-        if (!remotePlayers.ContainsKey(remoteData.id))
+        if (!remotePlayersData.ContainsKey(remoteData.id))
         {
             AddRemotePlayer(remoteData.id);
         }
 
-        remotePlayers[remoteData.id] = remoteData;
+        remotePlayersData[remoteData.id] = remoteData;
     }
 
     public PlayerMovement GetPlayerPosition(string id)
     {
-        return remotePlayers[id];
+        return remotePlayersData[id];
     }
 
     // Start is called before the first frame update

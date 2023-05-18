@@ -12,7 +12,7 @@ interface position {
     rotation: number;
 }
 
-interface moveData { 
+interface moveData {
     x: number;
     y: number;
     rotation: number;
@@ -81,7 +81,7 @@ class App {
 
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id)
-                socket.broadcast.emit('remotedisconnect', { date: new Date().getTime(), data: this._users[socket.id].id });
+                socket.broadcast.emit('remotedisconnect', this._users[socket.id].id);
                 delete this._users[socket.id];
                 console.log(`user disconnected`, this._users);
             })

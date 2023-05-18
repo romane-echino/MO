@@ -71,6 +71,15 @@ public class NetworkManager : MonoBehaviour
             });
         });
 
+        socket.On("remotedisconnect", (data) =>
+        {
+            Debug.Log("Remote Player disconnected");
+            Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.RemoveRemotePlayer(data.GetValue<string>());
+            });
+        });
+
         socket.On("remotemove", (data) =>
         {
             Debug.Log("Remote move!" + data);
