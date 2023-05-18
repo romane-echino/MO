@@ -14,7 +14,7 @@ public class NetworkManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var uri = new Uri("http://192.168.1.234:3000");
+        var uri = new Uri("http://84.73.8.162:3000");
         socket = new SocketIOUnity(uri, new SocketIOOptions
         {
             Query = new Dictionary<string, string>
