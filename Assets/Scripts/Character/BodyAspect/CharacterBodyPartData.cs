@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +53,13 @@ namespace MO.Character.BodyAspect
         UpperBody = 5,
         LowerBody = 6,
         LegL = 7,
-        LegR = 8
+        LegR = 8,
+        Neck = 9,
+        NeckShadow = 10,
+        LegShadow = 11,
+        EyeL = 12,
+        EyeR = 13,
+        Mouth = 14,
     }
 }
 

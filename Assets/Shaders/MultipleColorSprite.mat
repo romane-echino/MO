@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_New Shader Graph
+  m_Name: MultipleColorSprite
   m_Shader: {fileID: -6465566751694194690, guid: 5f9c2447fb70c1d4cbf4229c0666acbf, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -39,6 +39,6 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 0.6698113, g: 0.52036774, b: 0.3443841, a: 1}
+    - _Color: {r: 0.25338668, g: 0.18178178, b: 0.4056604, a: 1}
     - _SecondaryColor: {r: 0.447, g: 0.29170948, b: 0.02741039, a: 0.59607846}
   m_BuildTextureStacks: []
