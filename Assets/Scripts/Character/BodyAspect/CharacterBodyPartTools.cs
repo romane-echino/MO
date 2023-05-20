@@ -50,10 +50,10 @@ namespace MO.Character.BodyAspect
             if (result.colorQty == 0)
                 return;
             else if (result.colorQty == 1)
-                renderer.color = result.mainColor;
+                renderer.material.SetColor("_MainColor", result.mainColor);
             else if(result.colorQty == 2)
             {
-                renderer.color = result.mainColor;
+                renderer.material.SetColor("_MainColor", result.mainColor);
                 renderer.material.SetColor("_SecondaryColor", result.secondaryColor);
             }
         }
