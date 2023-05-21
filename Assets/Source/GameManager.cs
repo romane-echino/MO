@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public NetworkManager Network { get; private set; }
-public PlayerManager Players { get; private set; }
+    public PlayerManager Players { get; private set; }
+    public AttackManager Attack { get; private set; }
+    public CursorManager Cursor { get; private set; }
 
     private GameObject DebugUI { get; set; }
     private bool showDebugUI = false;
@@ -26,6 +28,8 @@ public PlayerManager Players { get; private set; }
 
         Network = GetComponentInChildren<NetworkManager>();
         Players = GetComponentInChildren<PlayerManager>();
+        Attack = GetComponentInChildren<AttackManager>();
+        Cursor = GetComponentInChildren<CursorManager>();
 
         var debugUITransform = transform.Find("DebugUI");
         DebugUI = debugUITransform.gameObject;
@@ -46,7 +50,8 @@ public PlayerManager Players { get; private set; }
         }
     }
 
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         if (Time.time >= _nextTime)
         {
             PingText.text = "Ping : " + Network.Ping.ToString();

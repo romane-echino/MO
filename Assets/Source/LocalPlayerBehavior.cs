@@ -12,6 +12,10 @@ public class LocalPlayerBehavior : MonoBehaviour
     private Vector3 _storedMovement = Vector3.zero;
     public Vector2 speed = new Vector2(10, 10);
 
+    void Awake()
+    {
+        Camera.main.transform.parent = this.transform;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +27,9 @@ public class LocalPlayerBehavior : MonoBehaviour
     {
         if (this._character.IsLocal)
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-            Vector3 movement = new Vector3(speed.x * x, speed.y * y, 0);
+            float inputX = Input.GetAxis("Horizontal");
+            float inputY = Input.GetAxis("Vertical");
+            Vector3 movement = new Vector3(speed.x * inputX, speed.y * inputY, 0);
             movement *= Time.deltaTime;
             transform.Translate(movement);
         }

@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Floor
+  - ???
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: Main
     uniqueID: 727217363
+    locked: 0
+  - name: Floor
+    uniqueID: 3499933413
     locked: 0

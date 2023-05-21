@@ -82,10 +82,10 @@ public class NetworkManager : MonoBehaviour
 
         socket.On("remotemove", (data) =>
         {
-            Debug.Log("Remote move!" + data);
+            //Debug.Log("Remote move!" + data);
             var remoteData = data.GetValue<PlayerMovement>();
 
-            Debug.Log("Remote move" + remoteData.id);
+            //Debug.Log("Remote move" + remoteData.id);
             
             Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
             {
@@ -101,7 +101,7 @@ public class NetworkManager : MonoBehaviour
     public void EmitMovement(Vector3 position)
     {
         var json = JsonUtility.ToJson(new PlayerMovement(position, this.playerId));
-        Debug.Log("move!" + json);
+        //Debug.Log("move!" + json);
         socket.EmitAsync("move", json);
     }
 
