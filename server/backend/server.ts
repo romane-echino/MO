@@ -4,7 +4,7 @@ import http from 'http'
 import socketIO from 'socket.io'
 import { v4 as uuidv4 } from 'uuid';
 
-const port: number = 3000;
+const port: number = 3001;
 
 interface position {
     x: number;
@@ -36,7 +36,11 @@ class App {
         this.port = port
 
         const app = express()
-        app.use(express.static(path.join(__dirname, '../public')))
+        //app.use(express.static(path.join(__dirname, '../public')))
+
+        app.get('/', (req, res) => {
+            return res.send('Hello world')
+        })
 
         app.get('/users', (req, res) => {
             console.log('retrieving users list')

@@ -8,13 +8,15 @@ const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const uuid_1 = require("uuid");
-const port = 3000;
+const port = 3001;
 class App {
     constructor(port) {
         this._users = {};
         this.port = port;
         const app = (0, express_1.default)();
-        app.use(express_1.default.static(path_1.default.join(__dirname, '../public')));
+        app.get('/', (req, res) => {
+            return res.send('Hello world');
+        });
         app.get('/users', (req, res) => {
             console.log('retrieving users list');
             return res.json(this._users);
@@ -43,10 +45,8 @@ class App {
             }, 1000);
             socket.on('move', (d) => {
                 let data = JSON.parse(d);
-                //console.log('move', data);
                 this._users[socket.id].lastPosition.x = data.x;
                 this._users[socket.id].lastPosition.y = data.y;
-                //socket.emit('hello', {date: new Date().getTime(), data: data});
                 socket.broadcast.emit('remotemove', data);
             });
             socket.on('disconnect', () => {

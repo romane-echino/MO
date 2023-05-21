@@ -1,0 +1,1 @@
+server:node server/backend/dist/server.js
