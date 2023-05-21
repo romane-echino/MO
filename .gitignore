@@ -72,7 +72,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 #nodejs
-/api/node_modules
-/api/dist
 /server/client/node_modules
 /server/backend/node_modules
+/server/client/package-lock.json
+/server/backend/package-lock.json
