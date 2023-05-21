@@ -38,7 +38,7 @@ public class CharacterBehavior : MonoBehaviour
     private void LateUpdate()
     {
         // Animation update
-        Vector3 movement = lastPosition - transform.position;
+        Vector3 movement = transform.position - lastPosition;
         bool onMovement = Mathf.Abs(movement.x) > DisplacementLimitToMove || Mathf.Abs(movement.y) > DisplacementLimitToMove;
         animator.SetBool("Move", onMovement);
 
