@@ -14,12 +14,17 @@ public class LocalPlayerBehavior : MonoBehaviour
 
     void Awake()
     {
-        Camera.main.transform.parent = this.transform;
+        
     }
     // Start is called before the first frame update
     void Start()
     {
         this._character = GetComponent<CharacterBehavior>();
+
+        if (this._character.IsLocal)
+        {
+            Camera.main.transform.parent = this.transform;
+        }
     }
 
     // Update is called once per frame

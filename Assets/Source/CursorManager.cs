@@ -7,6 +7,8 @@ public class CursorManager : MonoBehaviour
 
     public Texture2D defaultCursor;
     public Texture2D attackCursor;
+
+    private bool needUpdate = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +20,17 @@ public class CursorManager : MonoBehaviour
     {
         if (GameManager.Instance.Attack.IsPreparing())
         {
+            needUpdate = true;
             Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.ForceSoftware);
         }
         else
         {
-            Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.ForceSoftware);
+            if (needUpdate)
+            {
+                Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.ForceSoftware);
+                needUpdate = false;
+            }
+
         }
     }
 }
