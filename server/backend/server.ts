@@ -4,7 +4,11 @@ import http from 'http'
 import socketIO from 'socket.io'
 import { v4 as uuidv4 } from 'uuid';
 
-const port: number = 3001;
+var port: number = 3001;
+
+if(process.env.PORT){
+    port = parseInt(process.env.PORT);
+}
 
 interface position {
     x: number;
