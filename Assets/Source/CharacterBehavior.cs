@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBehavior : MonoBehaviour
+public partial class CharacterBehavior : MonoBehaviour
 {
     public string PlayerId { get; private set; }
     public bool IsLocal { get; private set; }
@@ -50,5 +50,15 @@ public class CharacterBehavior : MonoBehaviour
         }
 
         lastPosition = transform.position;
+    }
+
+    /// <summary>
+    /// Start the attack animation
+    /// </summary>
+    /// <param name="animationType">The type of animation, 0 is fist punch</param>
+    private void AttackAnimation(AttackType animationType)
+    {
+        animator.SetFloat("AttackType", (float)animationType);
+        animator.SetTrigger("Attack");
     }
 }
