@@ -101,6 +101,7 @@ public class AttackBehavior : MonoBehaviour
                     }
                 }
 
+                //Vector2[] attackPositions = [];
 
                 foreach (var p in GameManager.Instance.Attack.GetCurrentSkill().Pattern)
                 {

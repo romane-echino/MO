@@ -8,7 +8,12 @@ const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const uuid_1 = require("uuid");
-const port = 3001;
+const Ennemy_1 = require("./models/Ennemy");
+const Map_1 = require("./models/Map");
+var port = 3001;
+if (process.env.PORT) {
+    port = parseInt(process.env.PORT);
+}
 class App {
     constructor(port) {
         this._users = {};
@@ -20,6 +25,14 @@ class App {
         app.get('/users', (req, res) => {
             console.log('retrieving users list');
             return res.json(this._users);
+        });
+        app.get('/map', (req, res) => {
+            console.log('retrieving map');
+            return res.json(this._map);
+        });
+        app.get('/eny', (req, res) => {
+            console.log('retrieving ennemies');
+            return res.json(Object.values(this._ennemies));
         });
         console.log('path', path_1.default.join(__dirname, 'public'));
         this.server = new http_1.default.Server(app);
@@ -56,10 +69,26 @@ class App {
                 console.log(`user disconnected`, this._users);
             });
         });
+        this._map = new Map_1.Terrain();
+        this._ennemies = {};
     }
     Start() {
         this.server.listen(this.port);
         console.log(`Server listening on port ${this.port}.`);
+        let mapData = {};
+        for (let x = -10; x <= 10; x++) {
+            for (let y = -10; y <= 10; y++) {
+                mapData[`${x}_${y}`] = {
+                    TileType: Map_1.TileType.GRASS
+                };
+            }
+        }
+        this._map.Load(mapData);
+        let eny = (0, Ennemy_1.getEnnemy)(Ennemy_1.EnnemyType.Dummy, 3, 3, (t, a) => {
+            console.log('event from eny', t.toString());
+            this.io.emit(`ennemy${t.toString()}`, a);
+        });
+        this._ennemies[eny.Id] = eny;
     }
 }
 new App(port).Start();

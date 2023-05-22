@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using SocketIOClient;
 using SocketIOClient.Newtonsoft.Json;
+
 using UnityEngine;
+using UnityEngine.Networking;
+using Newtonsoft.Json;
 
 public class NetworkManager : MonoBehaviour
 {
+    //private string URI = "http://localhost:3001";
+    private string URI = "https://mo-server.herokuapp.com/";
     public SocketIOUnity socket;
     public double Ping = 0;
     public string playerId;
@@ -14,7 +19,8 @@ public class NetworkManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var uri = new Uri("https://mo-server.herokuapp.com/");
+        var uri = new Uri(this.URI);
+
         socket = new SocketIOUnity(uri, new SocketIOOptions
         {
             Query = new Dictionary<string, string>
@@ -86,7 +92,7 @@ public class NetworkManager : MonoBehaviour
             var remoteData = data.GetValue<PlayerMovement>();
 
             //Debug.Log("Remote move" + remoteData.id);
-            
+
             Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
             {
                 GameManager.Instance.Players.MoveRemote(remoteData);
@@ -98,6 +104,54 @@ public class NetworkManager : MonoBehaviour
         socket.Connect();
     }
 
+    IEnumerator GetRequest(string uri, Action<string> callback)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    yield return webRequest.downloadHandler.text;
+                    callback(webRequest.downloadHandler.text);
+                    break;
+            }
+        }
+    }
+
+
+    public void GetTerrain()
+    {
+        StartCoroutine(GetRequest(this.URI + "/map",
+        (string json) =>
+            {
+                var result = JsonConvert.DeserializeObject<Terrain>(json);
+                GameManager.Instance.Terrain.SetTerrain(result);
+            }));
+    }
+
+    public void GetEnnemies()
+    {
+        StartCoroutine(GetRequest(this.URI + "/eny",
+        (string json) =>
+            {
+                var result = JsonConvert.DeserializeObject<Ennemy[]>(json);
+                GameManager.Instance.Ennemies.SetEnnemies(result);
+            }));
+    }
     public void EmitMovement(Vector3 position)
     {
         var json = JsonUtility.ToJson(new PlayerMovement(position, this.playerId));

@@ -63,8 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfabe9e14895f94f980ad342c103457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackBoxPrefab: {fileID: 1351130662146276281, guid: f89703d64fa41344898f95623f7dd434, type: 3}
-  speed: {x: 10, y: 10}
+  speed: {x: 5, y: 5}
 --- !u!114 &-5143746616663442588
 MonoBehaviour:
   m_ObjectHideFlags: 0

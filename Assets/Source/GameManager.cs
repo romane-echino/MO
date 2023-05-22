@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public PlayerManager Players { get; private set; }
     public AttackManager Attack { get; private set; }
     public CursorManager Cursor { get; private set; }
+    public TerrainManager Terrain { get; private set; }
+    public EnnemyManager Ennemies { get; private set; }
 
     private GameObject DebugUI { get; set; }
     private bool showDebugUI = false;
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
         Players = GetComponentInChildren<PlayerManager>();
         Attack = GetComponentInChildren<AttackManager>();
         Cursor = GetComponentInChildren<CursorManager>();
+        Ennemies = GetComponentInChildren<EnnemyManager>();
+        Terrain = GetComponentInChildren<TerrainManager>();
 
         var debugUITransform = transform.Find("DebugUI");
         DebugUI = debugUITransform.gameObject;
