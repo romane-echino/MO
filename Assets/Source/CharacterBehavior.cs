@@ -1,8 +1,9 @@
+using MO.Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterBehavior : MonoBehaviour
+public partial class CharacterBehavior : MonoBehaviour
 {
     public string PlayerId { get; private set; }
     public bool IsLocal { get; private set; }
@@ -38,7 +39,7 @@ public class CharacterBehavior : MonoBehaviour
     private void LateUpdate()
     {
         // Animation update
-        Vector3 movement = lastPosition - transform.position;
+        Vector3 movement = transform.position - lastPosition;
         bool onMovement = Mathf.Abs(movement.x) > DisplacementLimitToMove || Mathf.Abs(movement.y) > DisplacementLimitToMove;
         animator.SetBool("Move", onMovement);
 
@@ -50,5 +51,15 @@ public class CharacterBehavior : MonoBehaviour
         }
 
         lastPosition = transform.position;
+    }
+
+    /// <summary>
+    /// Start the attack animation
+    /// </summary>
+    /// <param name="animationType">The type of animation, 0 is fist punch</param>
+    private void AttackAnimation(AnimationAttackType animationType)
+    {
+        animator.SetFloat("AttackType", (float)animationType);
+        animator.SetTrigger("Attack");
     }
 }
