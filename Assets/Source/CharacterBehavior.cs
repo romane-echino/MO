@@ -1,4 +1,5 @@
 using MO.Character;
+using MO.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,14 +15,29 @@ public partial class CharacterBehavior : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private EntityWorldUI entityUI;
 
     private Vector3 lastPosition;
     private bool lastDirAnimationLeft = true;
+
+    // TODO : Replace it with a proper system to handle life  and level?
+    private string characterName;
+    private int level = 1;
+    private int maxLife = 10;
+    private int currentLife = 10;
 
     public void Init(string id, bool isLocal = false)
     {
         this.PlayerId = id;
         this.IsLocal = isLocal;
+
+        characterName = $"Player {id}";
+        level = 1;
+        maxLife = 10;
+        currentLife = 10;
+        entityUI.InitializeLifebar(EntityType.Ally, characterName, level, maxLife, currentLife);
+        entityUI.Show();
     }
 
     // Start is called before the first frame update
@@ -62,4 +78,20 @@ public partial class CharacterBehavior : MonoBehaviour
         animator.SetFloat("AttackType", (float)animationType);
         animator.SetTrigger("Attack");
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("-10 life")]
+    private void TestGetDamage()
+    {
+        currentLife -= 2;
+        entityUI.UpdateLife(currentLife);
+    }
+
+    [ContextMenu("Full life")]
+    private void FullLife()
+    {
+        currentLife = maxLife;
+        entityUI.UpdateLife(maxLife);
+    }
+#endif
 }
