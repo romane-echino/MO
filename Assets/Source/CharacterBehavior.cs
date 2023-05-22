@@ -1,3 +1,4 @@
+using MO.Character;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,7 +57,7 @@ public partial class CharacterBehavior : MonoBehaviour
     /// Start the attack animation
     /// </summary>
     /// <param name="animationType">The type of animation, 0 is fist punch</param>
-    private void AttackAnimation(AttackType animationType)
+    private void AttackAnimation(AnimationAttackType animationType)
     {
         animator.SetFloat("AttackType", (float)animationType);
         animator.SetTrigger("Attack");
