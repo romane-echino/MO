@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MO.Character.BodyAspect
 {
@@ -28,7 +29,7 @@ namespace MO.Character.BodyAspect
         }
 
 #if UNITY_EDITOR
-        [ContextMenu("Test")]
+        [ContextMenu("Apply texture")]
         public void ApplyTexture()
         {
             UnityEditor.Undo.RecordObject(this, "apply texture to character");
@@ -36,6 +37,14 @@ namespace MO.Character.BodyAspect
             {
                 UnityEditor.Undo.RecordObject(partRenderer.Renderer, "apply texture to character");
                 partRenderer.Renderer.sprite = BodyPartData.GetSprite(partRenderer.Type);
+            }
+        }
+        [ContextMenu("Debug colors")]
+        public void DebugColor()
+        {
+            foreach (var partRenderer in bodyPartRenderers)
+            {
+                partRenderer.Renderer.color = new Color(Random.value, Random.value, Random.value, 1f);
             }
         }
 #endif

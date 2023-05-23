@@ -47,6 +47,7 @@ namespace MO.Character.BodyAspect
         public static void ApplyColorToBodyPart(BodyPartType bodyPart, CharacterColors colors, SpriteRenderer renderer)
         {
             var result = GetColorForBodyPart(bodyPart, colors);
+            renderer.color = Color.white;
             if (result.colorQty == 0)
                 return;
             else if (result.colorQty == 1)
