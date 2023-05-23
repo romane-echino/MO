@@ -10,8 +10,8 @@ using Newtonsoft.Json;
 
 public class NetworkManager : MonoBehaviour
 {
-    private string URI = "http://localhost:3001";
-    //private string URI = "https://mo-server.herokuapp.com/";
+    //private string URI = "http://localhost:3001";
+    private string URI = "https://mo-server.herokuapp.com/";
     public SocketIOUnity socket;
     public double Ping = 0;
     public string playerId;
