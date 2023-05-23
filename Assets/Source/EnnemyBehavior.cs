@@ -51,6 +51,7 @@ public class EnnemyBehavior : MonoBehaviour
 
     public void Die()
     {
+        animator.ResetTrigger("Hit");
         animator.SetBool("IsDead", true);
         entityUI.Hide();
     }
@@ -60,5 +61,6 @@ public class EnnemyBehavior : MonoBehaviour
         this.currentLife = this.maxLife;
         entityUI.UpdateLife(currentLife);
         entityUI.Show();
+        animator.SetBool("IsDead", false);
     }
 }
