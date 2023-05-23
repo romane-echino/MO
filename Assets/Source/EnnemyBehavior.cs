@@ -52,13 +52,12 @@ public class EnnemyBehavior : MonoBehaviour
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        animator.SetBool("IsDead", true);
     }
 
     public void Repop()
     {
         this.currentLife = this.maxLife;
         entityUI.UpdateLife(currentLife);
-        gameObject.SetActive(true);
     }
 }
