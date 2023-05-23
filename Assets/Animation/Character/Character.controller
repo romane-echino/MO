@@ -59,11 +59,11 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Face
+  m_Name: EyeBlink
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -6643780613355857603}
-    m_Position: {x: 420, y: 180, z: 0}
+    m_Position: {x: 450, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9008845193524026702}
     m_Position: {x: 180, y: 200, z: 0}
@@ -74,7 +74,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 670, y: 180, z: 0}
+  m_ExitPosition: {x: 700, y: 210, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -9008845193524026702}
 --- !u!1101 &-7596576494058335583
@@ -347,7 +347,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Face
+    m_Name: EyeBlink
     m_StateMachine: {fileID: -7724659899784003974}
     m_Mask: {fileID: 0}
     m_Motions: []
