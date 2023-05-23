@@ -119,7 +119,7 @@ class App {
                     data.positions.forEach(pos => {
                         //console.log(eny)
                         if (eny.Position.x === pos.x && eny.Position.y === pos.y) {
-                            
+
                             eny.Hit(10);
                             console.log('hit!', eny);
                         }
@@ -173,9 +173,9 @@ class App {
 
         this._map.Load(mapData);
 
-        let eny = getEnnemy(EnnemyType.Dummy, 3, 3, (t, a) => {
+        let eny = getEnnemy(EnnemyType.Dummy, 3, 3, (t, id, a) => {
             console.log('event from eny', t.toString())
-            this.io.emit(`ennemy${t.toString()}`, a)
+            this.io.emit(`ennemy${t.toString()}`, { id, a })
         });
 
         this._ennemies[eny.Id] = eny;

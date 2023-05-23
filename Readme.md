@@ -64,20 +64,20 @@ Le late-game qui tourne en rond
 - [x]  Déconnexion
 - [x]  Camera
 - [ ]  Bug fix animator pour remote player
-- [ ]  auto-z (physics 2d dans project settings)
+- [x]  auto-z (physics 2d dans project settings)
 - [ ]  Legacy name (nom de famille) les prénom son random
 - [ ]  Arrivée Fond au noir / 3 tombe tu choisi ton perso
 - [x]  L'ombre dessous
 
 ## Goal 3
 
-- [ ]  Map côté server
+- [x]  Map côté server
 - [x]  Caisse en bois / Manequin d'entrainement
-- [ ]  Les destructible (PV)
-- [ ]  Repop (côté serveur)
+- [x]  Les destructible (PV)
+- [x]  Repop (côté serveur)
 - [x]  Système d'attack avec pattern
 - [x]  UI des skills
-- [ ]  Ennemis côté server
+- [x]  Ennemis côté server
 
 ## Goal X
 

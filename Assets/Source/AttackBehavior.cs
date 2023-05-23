@@ -135,6 +135,7 @@ public class AttackBehavior : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     GameManager.Instance.Attack.Slay(attackPositions, this._character.PlayerId);
+                    this._character.AttackAnimation(MO.Character.AnimationAttackType.Punch);
                 }
             }
             else

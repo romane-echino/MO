@@ -36,7 +36,7 @@ public class NetworkManager : MonoBehaviour
 
         socket.JsonSerializer = new NewtonsoftJsonSerializer();
     }
-    
+
     void Start()
     {
 
@@ -94,7 +94,7 @@ public class NetworkManager : MonoBehaviour
 
         socket.On("remotemove", (data) =>
         {
-            //Debug.Log("Remote move!" + data);
+            Debug.Log("Remote move!" + data);
             var remoteData = data.GetValue<PlayerMovement>();
 
             //Debug.Log("Remote move" + remoteData.id);

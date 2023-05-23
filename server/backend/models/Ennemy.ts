@@ -11,14 +11,14 @@ export class Ennemy {
     Life: number = 100;
     RepopDelay: number = 5;
 
-    Event?: (type: EnnemyEventType, ...args: any[]) => void;
+    Event?: (type: EnnemyEventType, id: string, ...args: any[]) => void;
 
-    private _baseLife: number = 0;
-    private _basePosition: Vector2 = Vector2.zero;
+    MaxLife: number = 0;
+    InitialPosition: Vector2 = Vector2.zero;
 
     constructor(Name: string, Prefab: string, Life: number, RepopDelay: number) {
         this.Id = uuidv4()
-        this._baseLife = Life;
+        this.MaxLife = Life;
         this.Life = Life;
         this.Name = Name;
         this.Prefab = Prefab;
@@ -26,13 +26,18 @@ export class Ennemy {
     }
 
     public Hit(Damage: number) {
+        if(this.Life <= 0){
+            return;
+        }
+        
         console.log(`${this.Name} is hit with ${Damage} damage`)
         this.Life -= Damage;
         if (this.Life <= 0) {
             this.Life = 0;
             if (this.Event) {
                 this.Event(
-                    EnnemyEventType.Die
+                    EnnemyEventType.Die,
+                    this.Id
                 )
             }
 
@@ -44,7 +49,8 @@ export class Ennemy {
             if (this.Event) {
                 this.Event(
                     EnnemyEventType.Hit,
-                    this.Life,
+                    this.Id,
+                    this.Life
 
                 )
             }
@@ -52,16 +58,17 @@ export class Ennemy {
 
 
 
-        
+
     }
 
     public Repop() {
-        this.Life = this._baseLife;
-        this.Position = this._basePosition;
+        this.Life = this.MaxLife;
+        this.Position = this.InitialPosition;
 
         if (this.Event) {
             this.Event(
                 EnnemyEventType.Repop,
+                this.Id,
                 this.Life,
                 this.Position
             )
@@ -92,7 +99,7 @@ ENNEMIES[EnnemyType.Dummy] = new Ennemy(
 );
 
 
-export function getEnnemy(type: EnnemyType, x: number, y: number, givenFunction: (type: EnnemyEventType, ...args: any[]) => void): Ennemy {
+export function getEnnemy(type: EnnemyType, x: number, y: number, givenFunction: (type: EnnemyEventType, id: string, ...args: any[]) => void): Ennemy {
     let source = ENNEMIES[type];
     let result: Ennemy = Object.assign(
         new Ennemy(
@@ -102,7 +109,8 @@ export function getEnnemy(type: EnnemyType, x: number, y: number, givenFunction:
             source.RepopDelay),
         source);
 
-    result.Position = new Vector2(x, y)
+    result.InitialPosition = new Vector2(x, y)
+    result.Position = result.InitialPosition;
     result.Event = givenFunction;
     return result;
 }

@@ -103,9 +103,9 @@ class App {
             }
         }
         this._map.Load(mapData);
-        let eny = (0, Ennemy_1.getEnnemy)(Ennemy_1.EnnemyType.Dummy, 3, 3, (t, a) => {
+        let eny = (0, Ennemy_1.getEnnemy)(Ennemy_1.EnnemyType.Dummy, 3, 3, (t, id, a) => {
             console.log('event from eny', t.toString());
-            this.io.emit(`ennemy${t.toString()}`, a);
+            this.io.emit(`ennemy${t.toString()}`, { id, a });
         });
         this._ennemies[eny.Id] = eny;
     }
