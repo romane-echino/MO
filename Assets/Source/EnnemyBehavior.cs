@@ -27,7 +27,7 @@ public class EnnemyBehavior : MonoBehaviour
         maxLife = ennemy.MaxLife;
         currentLife = ennemy.Life;
 
-        entityUI.InitializeLifebar(EntityType.Ally, characterName, level, maxLife, currentLife);
+        entityUI.InitializeLifebar(EntityType.Enemy, characterName, level, maxLife, currentLife);
         entityUI.Show();
     }
 
