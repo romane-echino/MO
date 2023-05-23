@@ -59,6 +59,10 @@ public class PlayerManager : MonoBehaviour
         remotePlayersData[remoteData.id] = remoteData;
     }
 
+    public void AttackRemote(string id){
+        remotePlayersGameObjects[id].GetComponent<CharacterBehavior>().AttackAnimation(MO.Character.AnimationAttackType.Punch);
+    }
+
     public PlayerMovement GetPlayerPosition(string id)
     {
         return remotePlayersData[id];

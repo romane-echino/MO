@@ -105,6 +105,19 @@ public class NetworkManager : MonoBehaviour
             });
         });
 
+        socket.On("remoteattack", (data) =>
+        {
+            Debug.Log("Remote attack!" + data);
+            var remoteData = data.GetValue<string>();
+
+            //Debug.Log("Remote move" + remoteData.id);
+
+            Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.AttackRemote(remoteData);
+            });
+        });
+
 
         Debug.Log("Connecting...");
         socket.Connect();

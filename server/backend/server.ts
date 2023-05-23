@@ -126,7 +126,7 @@ class App {
                     })
                 });
                 //socket.emit('hello', {date: new Date().getTime(), data: data});
-                //socket.broadcast.emit('remotemove', data);
+                socket.broadcast.emit('remoteattack', data.id);
             });
 
             socket.on('disconnect', () => {
