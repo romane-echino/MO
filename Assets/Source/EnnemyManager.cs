@@ -10,6 +10,34 @@ public class EnnemyManager : MonoBehaviour
     void Start()
     {
         GameManager.Instance.Network.GetEnnemies();
+        ConnectSocketFunctions();
+    }
+
+    private void ConnectSocketFunctions(){
+        GameManager.Instance.Network.socket.On("ennemyhit", (data) =>
+        {
+            Debug.Log("Remote ennemy hit!" + data);
+            
+        });
+
+        GameManager.Instance.Network.socket.On("ennemydie", (data) =>
+        {
+            Debug.Log("Remote ennemy die!" + data);
+        });
+
+        GameManager.Instance.Network.socket.On("ennemyrepop", (data) =>
+        {
+            Debug.Log("Remote ennemy repop!" + data);
+            //Debug.Log("Remote move!" + data);
+            //var remoteData = data.GetValue<PlayerMovement>();
+
+            //Debug.Log("Remote move" + remoteData.id);
+
+            /*Dispatcher.UnityMainThreadDispatcher.Instance.Enqueue(() =>
+            {
+                GameManager.Instance.Players.MoveRemote(remoteData);
+            });*/
+        });
     }
 
     // Update is called once per frame

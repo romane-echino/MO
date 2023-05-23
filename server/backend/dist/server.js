@@ -62,6 +62,18 @@ class App {
                 this._users[socket.id].lastPosition.y = data.y;
                 socket.broadcast.emit('remotemove', data);
             });
+            socket.on('attack', (d) => {
+                let data = JSON.parse(d);
+                console.log('attack', data);
+                Object.values(this._ennemies).forEach(eny => {
+                    data.positions.forEach(pos => {
+                        if (eny.Position.x === pos.x && eny.Position.y === pos.y) {
+                            eny.Hit(10);
+                            console.log('hit!', eny);
+                        }
+                    });
+                });
+            });
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id);
                 socket.broadcast.emit('remotedisconnect', this._users[socket.id].id);
@@ -78,8 +90,15 @@ class App {
         let mapData = {};
         for (let x = -10; x <= 10; x++) {
             for (let y = -10; y <= 10; y++) {
+                let type = Map_1.TileType.UNKNOWN;
+                if (y === 0 && x === 0) {
+                    type = Map_1.TileType.WATER;
+                }
+                else {
+                    type = Map_1.TileType.GRASS;
+                }
                 mapData[`${x}_${y}`] = {
-                    TileType: Map_1.TileType.GRASS
+                    TileType: type
                 };
             }
         }

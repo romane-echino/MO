@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Ennemy, EnnemyEventType, EnnemyType, getEnnemy } from './models/Ennemy';
 import { Terrain, Tile, TileType } from './models/Map';
+import { Vector2 } from './models/Utils';
 
 var port: number = 3001;
 
@@ -25,6 +26,11 @@ interface moveData {
     rotation: number;
 
     id: string;
+}
+
+interface attackData {
+    positions: Vector2[];
+    id: number;
 }
 
 class App {
@@ -106,6 +112,23 @@ class App {
                 socket.broadcast.emit('remotemove', data);
             });
 
+            socket.on('attack', (d: string) => {
+                let data: attackData = JSON.parse(d);
+                console.log('attack', data);
+                Object.values(this._ennemies).forEach(eny => {
+                    data.positions.forEach(pos => {
+                        //console.log(eny)
+                        if (eny.Position.x === pos.x && eny.Position.y === pos.y) {
+                            
+                            eny.Hit(10);
+                            console.log('hit!', eny);
+                        }
+                    })
+                });
+                //socket.emit('hello', {date: new Date().getTime(), data: data});
+                //socket.broadcast.emit('remotemove', data);
+            });
+
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id)
                 socket.broadcast.emit('remotedisconnect', this._users[socket.id].id);
@@ -126,10 +149,18 @@ class App {
 
         for (let x = -10; x <= 10; x++) {
             for (let y = -10; y <= 10; y++) {
+                let type = TileType.UNKNOWN;
+                if (y === 0 && x === 0) {
+                    type = TileType.WATER
+                }
+                else {
+                    type = TileType.GRASS
+                }
+
                 mapData[`${x}_${y}`] = {
                     //Players: [],
                     //Ennemies: [],
-                    TileType: TileType.GRASS
+                    TileType: type
                 }
             }
         }

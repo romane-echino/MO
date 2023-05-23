@@ -10,14 +10,15 @@ using Newtonsoft.Json;
 
 public class NetworkManager : MonoBehaviour
 {
-    //private string URI = "http://localhost:3001";
-    private string URI = "https://mo-server.herokuapp.com/";
+    private string URI = "http://localhost:3001";
+    //private string URI = "https://mo-server.herokuapp.com/";
     public SocketIOUnity socket;
     public double Ping = 0;
     public string playerId;
 
     // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         var uri = new Uri(this.URI);
 
@@ -34,6 +35,11 @@ public class NetworkManager : MonoBehaviour
         });
 
         socket.JsonSerializer = new NewtonsoftJsonSerializer();
+    }
+    
+    void Start()
+    {
+
 
         ///// reserved socketio events
         socket.OnConnected += (sender, e) =>
@@ -159,6 +165,13 @@ public class NetworkManager : MonoBehaviour
         socket.EmitAsync("move", json);
     }
 
+    public void EmitHit(List<Vector2> attacks, string playerId)
+    {
+        var json = JsonUtility.ToJson(new PlayerAttack(attacks, this.playerId));
+        Debug.Log("attack!" + json);
+        socket.EmitAsync("attack", json);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -189,6 +202,19 @@ public class PlayerMovement
     }
 }
 
+
+[System.Serializable]
+public class PlayerAttack
+{
+    public List<Vector2> positions;
+    public string id;
+
+    public PlayerAttack(List<Vector2> attacks, string playerId)
+    {
+        this.positions = attacks;
+        this.id = playerId;
+    }
+}
 
 
 [System.Serializable]

@@ -101,7 +101,7 @@ public class AttackBehavior : MonoBehaviour
                     }
                 }
 
-                //Vector2[] attackPositions = [];
+                List<Vector2> attackPositions = new List<Vector2>();
 
                 foreach (var p in GameManager.Instance.Attack.GetCurrentSkill().Pattern)
                 {
@@ -120,13 +120,21 @@ public class AttackBehavior : MonoBehaviour
                         px = int.Parse(values[0]);
                         py = int.Parse(values[1]);
                     }
-                    var key = (px * pxd) + "_" + (py * pyd);
+                    var pxValue = px * pxd;
+                    var pyValue = py * pyd;
+                    var key = (pxValue) + "_" + (pyValue);
+                    var playerX = Mathf.FloorToInt(transform.position.x) + 1;
+                    var playerY = Mathf.FloorToInt(transform.position.y) + 1;
+
+                    //Debug.Log($"player {playerX}:{playerY} | attack {pxValue} {pyValue}");
+                    attackPositions.Add(new Vector2(pxValue + playerX  , pyValue + playerY));
+
                     Boxes[key].SetActive(true);
                 }
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    GameManager.Instance.Attack.Slay();
+                    GameManager.Instance.Attack.Slay(attackPositions, this._character.PlayerId);
                 }
             }
             else

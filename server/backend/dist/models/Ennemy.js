@@ -21,21 +21,22 @@ class Ennemy {
         this.RepopDelay = RepopDelay;
     }
     Hit(Damage) {
+        console.log(`${this.Name} is hit with ${Damage} damage`);
         this.Life -= Damage;
         if (this.Life <= 0) {
             this.Life = 0;
             if (this.Event) {
                 this.Event(EnnemyEventType.Die);
             }
+            setTimeout(() => {
+                this.Repop();
+            }, this.RepopDelay * 1000);
         }
         else {
             if (this.Event) {
                 this.Event(EnnemyEventType.Hit, this.Life);
             }
         }
-        setTimeout(() => {
-            this.Repop();
-        }, this.RepopDelay * 1000);
     }
     Repop() {
         this.Life = this._baseLife;
@@ -61,7 +62,8 @@ var EnnemyType;
 })(EnnemyType = exports.EnnemyType || (exports.EnnemyType = {}));
 ENNEMIES[EnnemyType.Dummy] = new Ennemy('Manequin', 'Dummy', 100, 5);
 function getEnnemy(type, x, y, givenFunction) {
-    let result = Object.assign({}, ENNEMIES[type]);
+    let source = ENNEMIES[type];
+    let result = Object.assign(new Ennemy(source.Name, source.Prefab, source.Life, source.RepopDelay), source);
     result.Position = new Utils_1.Vector2(x, y);
     result.Event = givenFunction;
     return result;

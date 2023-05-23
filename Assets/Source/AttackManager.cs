@@ -40,8 +40,9 @@ public class AttackManager : MonoBehaviour
         }
     }
 
-    public void Slay(){
+    public void Slay(List<Vector2> attacks, string playerId){
         this._isPreparing = false;
+        GameManager.Instance.Network.EmitHit(attacks, playerId);
     }
 
     void Awake()
