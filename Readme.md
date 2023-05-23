@@ -52,32 +52,40 @@ Le late-game qui tourne en rond
     - [x] Toujours de face
     - [x] Mouvement libre (quel case ils sont défini par algo)
     - [x] WASD
-- [ ] Map (1st study) Tiles
-    - [ ] Système de case
+- [x] Map (1st study) Tiles
+    - [x] Système de case
 - [x] Déplacement
 - [x] Multiplayer
 
 
 ## Goal 2
 
-- [x]  Host server
-- [x]  Déconnexion
-- [x]  Camera
-- [ ]  Bug fix animator pour remote player
-- [x]  auto-z (physics 2d dans project settings)
-- [ ]  Legacy name (nom de famille) les prénom son random
-- [ ]  Arrivée Fond au noir / 3 tombe tu choisi ton perso
-- [x]  L'ombre dessous
+- [x] Host server
+- [x] Déconnexion
+- [x] Camera
+- [x] Bug fix animator pour remote player
+- [x] auto-z (physics 2d dans project settings)
+- [x] L'ombre dessous
 
 ## Goal 3
 
-- [x]  Map côté server
-- [x]  Caisse en bois / Manequin d'entrainement
-- [x]  Les destructible (PV)
-- [x]  Repop (côté serveur)
-- [x]  Système d'attack avec pattern
-- [x]  UI des skills
-- [x]  Ennemis côté server
+- [x] Map côté server
+- [x] Caisse en bois / Manequin d'entrainement
+- [x] Les destructible (PV)
+- [x] Repop (côté serveur)
+- [x] Système d'attack avec pattern
+- [x] UI des skills
+- [x] Ennemis côté server
+
+## Goal 4
+- [ ] Aspect fantomatique
+- [ ] Objets (apparence)
+- [ ] Persistance map, Player, Ennemies
+- [ ] Dialogues (Chat)
+- [ ] Début système quête (reflexion)
+- [ ] Implementer Tiles graphique du terrain
+- [ ] Legacy name (nom de famille) les prénom son random
+- [ ] Arrivée Fond au noir / 3 tombe tu choisi ton perso
 
 ## Goal X
 
