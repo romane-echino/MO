@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using MO.Utils;
 
 namespace MO.Item
 {
-    public class ItemManager : MonoBehaviour {
+    public class ItemManager : Singleton<ItemManager> {
         
         [SerializeField]
         private List<ItemVisualData> itemVisualDatas = new List<ItemVisualData>();
@@ -13,7 +14,8 @@ namespace MO.Item
 
         private Dictionary<string, ItemVisualData> ItemPerKey = new Dictionary<string, ItemVisualData>();
 
-        private void Awake() {
+        protected override void Awake() {
+            base.Awake();
             foreach(var item in ItemVisualDatas)
             {
                 ItemPerKey.Add(item.Id, item);

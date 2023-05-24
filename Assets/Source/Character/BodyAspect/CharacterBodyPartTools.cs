@@ -39,6 +39,10 @@ namespace MO.Character.BodyAspect
                     return "Eye";
                 case BodyPartType.EyeR:
                     return "Eye";
+                case BodyPartType.HandL:
+                    return "Hand";
+                case BodyPartType.HandR:
+                    return "Hand";
                 default:
                     return bodyPart.ToString();
             }
@@ -93,6 +97,9 @@ namespace MO.Character.BodyAspect
                     return (1, colors.EyeColor, Color.magenta);
                 case BodyPartType.Mouth:
                     return (2, colors.TongueColor, colors.MouthColor);
+                case BodyPartType.HandL:
+                case BodyPartType.HandR:
+                    return (1, colors.SkinColor, Color.magenta);
                 default:
                     return (0, Color.magenta, Color.magenta);
             }

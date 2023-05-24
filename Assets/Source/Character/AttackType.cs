@@ -2,6 +2,7 @@
 {
     public enum AnimationAttackType
     {
-        Punch = 0
+        Punch = 0,
+        SwordLeftHand = 1
     }
 }

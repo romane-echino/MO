@@ -60,6 +60,8 @@ namespace MO.Character.BodyAspect
         EyeL = 12,
         EyeR = 13,
         Mouth = 14,
+        HandL = 15,
+        HandR = 16
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using MO.Item;
+using System.Linq;
 
 namespace MO.Character.BodyAspect
 {
@@ -12,6 +13,8 @@ namespace MO.Character.BodyAspect
 
         public CharacterBodyPartData BodyPartData;
         public CharacterColors Colors;
+
+        public List<BodyPartType> HiddenBodyParts = new List<BodyPartType>();
 
         [SerializeField, Header("References")]
         private List<BodyPartRenderer> bodyPartRenderers = new List<BodyPartRenderer>();
@@ -24,6 +27,7 @@ namespace MO.Character.BodyAspect
         private void Awake()
         {
             ApplyColors();
+            HideBodyPart();
         }
 
         public void ApplyEquipedItems(ItemObject[] items)
@@ -33,6 +37,7 @@ namespace MO.Character.BodyAspect
                 Destroy(equipedItems[key]);
             }
             equipedItems.Clear();
+            HideBodyPart();
 
             for (int i = 0; i < items.Length; i++)
             {
@@ -47,17 +52,25 @@ namespace MO.Character.BodyAspect
             ItemManager itemManager = FindObjectOfType<ItemManager>();
             var itemVisualData = itemManager.GetItemVisualData(id);
             GameObject go = new GameObject($"item_{itemVisualData.Id}");
-            foreach(var anchor in bodyPartAnchors){
-                if(anchor.Type == itemVisualData.AnchorType){
-                    go.transform.SetParent(anchor.Transform);
-                    go.transform.localPosition = Vector3.zero;
-                    go.transform.localScale = Vector3.one;
-                }
-            }
+
+            BodyPartAnchor anchor = bodyPartAnchors.First(x => x.Type == itemVisualData.AnchorType);
+
+            go.transform.SetParent(anchor.Transform);
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localScale = Vector3.one;
+            go.transform.localRotation = Quaternion.identity;
 
             var renderer = go.AddComponent<SpriteRenderer>();
             renderer.sprite = itemVisualData.Sprite;
-            renderer.sortingOrder = itemVisualData.LayerOrder;
+            renderer.sortingOrder = itemVisualData.UseSpecificLayerOrder ? itemVisualData.LayerOrder : anchor.LayerOrder;
+
+            // Set special body part visibility
+            if(itemVisualData.VisibleBodyParts != null && itemVisualData.VisibleBodyParts.Count > 0){
+                foreach (var bodypart in itemVisualData.VisibleBodyParts)
+                {
+                    bodyPartRenderers.First(x => x.Type == bodypart).Renderer.gameObject.SetActive(true);
+                }
+            }
 
             equipedItems.Add(id, go);
         }
@@ -67,6 +80,14 @@ namespace MO.Character.BodyAspect
             foreach (var partRenderer in bodyPartRenderers)
             {
                 CharacterBodyPartTools.ApplyColorToBodyPart(partRenderer.Type, Colors, partRenderer.Renderer);
+            }
+        }
+
+        private void HideBodyPart(){
+            foreach (var bodypart in HiddenBodyParts)
+            {
+                if(bodyPartRenderers.Exists(x => x.Type == bodypart))
+                    bodyPartRenderers.First(x => x.Type == bodypart).Renderer.gameObject.SetActive(false);
             }
         }
 
@@ -111,6 +132,8 @@ namespace MO.Character.BodyAspect
         None = 0,
         BottomHead = 1,
         TopHead = 2,
+        HandL = 3,
+        HandR = 4
     }
 }
 

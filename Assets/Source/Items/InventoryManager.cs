@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using MO.Utils;
 using UnityEngine;
 
 namespace MO.Item
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : Singleton<InventoryManager>
     {
         public ItemObject[] Slots = new ItemObject[512];
 
@@ -51,7 +52,13 @@ namespace MO.Item
     }
 
     public enum ItemType{
-        Helmet = 0,
+        Head = 0,
+        Shoulder = 1,
+        Chest = 2,
+        Belt = 3,
+        Legs = 4,
+        Feet = 5,
+        EquipedWeapon = 16
     }
 }
 
