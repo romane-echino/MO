@@ -167,6 +167,7 @@ class App {
         this._map = new Terrain();
         this._ennemies = {};
 
+        /*
         // This will handle process.exit():
         process.on('exit', this.gracefulShutdown);
 
@@ -176,7 +177,7 @@ class App {
         process.on('SIGKILL', this.gracefulShutdown);
 
         // This will prevent dirty exit on code-fault crashes:
-        process.on('uncaughtException', this.gracefulShutdown);
+        process.on('uncaughtException', this.gracefulShutdown);*/
     }
 
     public async Start() {
