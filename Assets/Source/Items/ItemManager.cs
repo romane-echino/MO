@@ -14,7 +14,8 @@ namespace MO.Item
 
         private Dictionary<string, ItemVisualData> ItemPerKey = new Dictionary<string, ItemVisualData>();
 
-        private void Awake() {
+        protected override void Awake() {
+            base.Awake();
             foreach(var item in ItemVisualDatas)
             {
                 ItemPerKey.Add(item.Id, item);
