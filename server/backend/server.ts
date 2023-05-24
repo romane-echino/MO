@@ -121,10 +121,17 @@ class App {
             socket.on('move', (d: string) => {
                 let data: moveData = JSON.parse(d);
                 //console.log('move', data);
-                this._users[socket.id].lastPosition.x = data.x;
-                this._users[socket.id].lastPosition.y = data.y;
-                //socket.emit('hello', {date: new Date().getTime(), data: data});
-                socket.broadcast.emit('remotemove', data);
+
+                try{
+                    this._users[socket.id].lastPosition.x = data.x;
+                    this._users[socket.id].lastPosition.y = data.y;
+                    //socket.emit('hello', {date: new Date().getTime(), data: data});
+                    socket.broadcast.emit('remotemove', data);
+                }
+                catch(e){
+                    console.log('error on move!?')
+                }
+                
             });
 
             socket.on('attack', (d: string) => {
