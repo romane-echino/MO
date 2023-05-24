@@ -129,14 +129,20 @@ Il n'y a pas de centimes de gold
 100 scrap donne 1 gold
 On peut transformer les scrap en autre composant de métier (100 scrap === 10 iron)
 
+Inventaire:
+- 32 slot pour ce qui est équipé (Casque, armure, l'arme actuelle sélectionnée)
+- 32 slot pour les outils / armes de métier
+- 256? slot d'inventaire
+
+Le choix de l'arme de métier à équippé pourrait se faire avec la roulette ou/et F1,F2, etc
+
 1 Case d'inventaire par métier
 64 première case de l'inv pour le perso (équipé)
 12 case pour le sac 4x3
 + 1x4 ralenti de 20%
 + 1x4 relenti de 40%
 
-On choisi l'arme avec la scroll wheel
-armes n'ont pas de dégat => les dégats sont basé sur le niveau de métier
+Les armes n'ont pas de dégat => les dégats sont basé sur le niveau de métier
 les armes on des bonus de métier qui augemente la compétence ou qui améliore le métier (20+ récolte, CD réduit de 10%)
 
 Quand on meurs on perd le scrap

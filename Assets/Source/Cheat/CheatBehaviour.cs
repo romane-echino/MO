@@ -7,7 +7,7 @@ public class CheatBehaviour : MonoBehaviour {
         ItemManager itemManager = FindObjectOfType<ItemManager>();
         InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
 
-        ItemObject helmet = new ItemObject(){Id = "0", Type = ItemType.Helmet};
+        ItemObject helmet = new ItemObject(){Id = "0", Type = ItemType.Head};
         inventoryManager.Equip(helmet);
         var players = FindObjectsOfType<CharacterBehavior>();
         foreach(var player in players){
@@ -17,12 +17,12 @@ public class CheatBehaviour : MonoBehaviour {
         }
     }
 
-    [ContextMenu("Equip Helmet 2")]
+    [ContextMenu("Equip Iron Sword")]
     public void EquipItem2(){
         ItemManager itemManager = FindObjectOfType<ItemManager>();
         InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
 
-        ItemObject helmet = new ItemObject(){Id = "1", Type = ItemType.Helmet};
+        ItemObject helmet = new ItemObject(){Id = "3", Type = ItemType.EquipedWeapon};
         inventoryManager.Equip(helmet);
         var players = FindObjectsOfType<CharacterBehavior>();
         foreach(var player in players){

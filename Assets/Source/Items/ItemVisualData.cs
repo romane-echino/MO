@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MO.Character.BodyAspect;
+using MO.Character;
 
 namespace MO.Item
 {
@@ -11,7 +12,11 @@ namespace MO.Item
         public string Id;
         public Sprite Sprite;
         public BodyPartAnchorType AnchorType;
+        public bool UseSpecificLayerOrder = false;
         public int LayerOrder;
+        
+        public List<BodyPartType> VisibleBodyParts = new List<BodyPartType>();
+        public AnimationAttackType AnimationAttackType;
     }
 }
 

@@ -335,6 +335,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Hand
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 184
+        width: 42
+        height: 42
+      alignment: 9
+      pivot: {x: 0.7, y: 0.62}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682f912e8fbf74949bd4f0e5fb874c93
+      internalID: 2006839908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -349,6 +370,7 @@ TextureImporter:
       Arm: -225960608
       Eye: 964439917
       Forearm: -830251414
+      Hand: 2006839908
       Head: -775854476
       Leg: 331002187
       LegShadow: -2122619499

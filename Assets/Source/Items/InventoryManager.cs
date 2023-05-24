@@ -51,7 +51,13 @@ namespace MO.Item
     }
 
     public enum ItemType{
-        Helmet = 0,
+        Head = 0,
+        Shoulder = 1,
+        Chest = 2,
+        Belt = 3,
+        Legs = 4,
+        Feet = 5,
+        EquipedWeapon = 16
     }
 }
 
