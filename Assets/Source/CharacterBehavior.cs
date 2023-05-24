@@ -4,14 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MO.Character.BodyAspect;
+using MO.Item;
 
 public partial class CharacterBehavior : MonoBehaviour
 {
     public string PlayerId { get; private set; }
     public bool IsLocal { get; private set; }
-
-    [field:SerializeField]
-    public CharacterAppeareance Appeareance {get; private set;}
 
     [Header("Animation")]
     public float DisplacementLimitToMove = 0.01f;
@@ -21,6 +19,8 @@ public partial class CharacterBehavior : MonoBehaviour
     private Animator animator;
     [SerializeField]
     private EntityWorldUI entityUI;
+    [SerializeField]
+    private CharacterAppeareance appeareance;
 
     private Vector3 lastPosition;
     private bool lastDirAnimationLeft = true;
@@ -30,6 +30,10 @@ public partial class CharacterBehavior : MonoBehaviour
     private int level = 1;
     private int maxLife = 10;
     private int currentLife = 10;
+
+    private int equipedWeaponSlot = 0;
+
+    private ItemObject[] equipedItemsSlots;
 
     public void Init(string id, bool isLocal = false)
     {
@@ -44,16 +48,15 @@ public partial class CharacterBehavior : MonoBehaviour
         entityUI.Show();
     }
 
+    public void EquipItems(ItemObject[] slots){
+        equipedItemsSlots = slots;
+        appeareance.ApplyEquipedItems(slots);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         lastPosition = transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void LateUpdate()
@@ -77,8 +80,12 @@ public partial class CharacterBehavior : MonoBehaviour
     /// Start the attack animation
     /// </summary>
     /// <param name="animationType">The type of animation, 0 is fist punch</param>
-    public void AttackAnimation(AnimationAttackType animationType)
+    public void AttackAnimation()
     {
+        var animationType = AnimationAttackType.Punch;
+        if(equipedItemsSlots != null && equipedItemsSlots[(int)ItemType.EquipedWeapon] != null){
+            animationType = ItemManager.Instance.GetItemVisualData(equipedItemsSlots[(int)ItemType.EquipedWeapon].Id).AnimationAttackType;
+        }
         animator.SetFloat("AttackType", (float)animationType);
         animator.SetTrigger("Attack");
     }

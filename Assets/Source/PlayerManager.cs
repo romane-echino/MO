@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     public void AttackRemote(string id){
-        remotePlayersGameObjects[id].GetComponent<CharacterBehavior>().AttackAnimation(MO.Character.AnimationAttackType.Punch);
+        remotePlayersGameObjects[id].GetComponent<CharacterBehavior>().AttackAnimation();
     }
 
     public PlayerMovement GetPlayerPosition(string id)

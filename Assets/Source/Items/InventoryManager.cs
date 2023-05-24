@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using MO.Utils;
 using UnityEngine;
 
 namespace MO.Item
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : Singleton<InventoryManager>
     {
         public ItemObject[] Slots = new ItemObject[512];
 

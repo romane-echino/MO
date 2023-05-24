@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using MO.Utils;
 
 namespace MO.Item
 {
-    public class ItemManager : MonoBehaviour {
+    public class ItemManager : Singleton<ItemManager> {
         
         [SerializeField]
         private List<ItemVisualData> itemVisualDatas = new List<ItemVisualData>();
