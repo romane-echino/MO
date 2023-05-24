@@ -194,6 +194,8 @@ GameObject:
   - component: {fileID: 239905730574360859}
   - component: {fileID: 1533068296058829839}
   - component: {fileID: 2908180819354034957}
+  - component: {fileID: 6873278348523812647}
+  - component: {fileID: 317922842560993504}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -324,3 +326,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnnemyPrefabs:
   - {fileID: 8573976273668135495, guid: 84d4e9a3aecf72f45987e7484be91b82, type: 3}
+--- !u!114 &6873278348523812647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132369569858747612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a3f754d357d374fb019230c3bf3dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemVisualDatas:
+  - {fileID: 11400000, guid: aef3e3630f65d0c48a3cec9e3606957c, type: 2}
+--- !u!114 &317922842560993504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5132369569858747612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7421dfff75dbede47834a5cf8ab465f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

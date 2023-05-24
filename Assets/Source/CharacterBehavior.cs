@@ -9,6 +9,8 @@ public partial class CharacterBehavior : MonoBehaviour
     public string PlayerId { get; private set; }
     public bool IsLocal { get; private set; }
 
+    public MO.Character.BodyAspect.CharacterAppeareance Appeareance;
+
     [Header("Animation")]
     public float DisplacementLimitToMove = 0.01f;
 

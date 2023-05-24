@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using MO.Item;
 
 namespace MO.Character.BodyAspect
 {
@@ -15,9 +16,50 @@ namespace MO.Character.BodyAspect
         [SerializeField, Header("References")]
         private List<BodyPartRenderer> bodyPartRenderers = new List<BodyPartRenderer>();
 
+        [SerializeField]
+        private List<BodyPartAnchor> bodyPartAnchors = new List<BodyPartAnchor>();
+
+        private Dictionary<string, GameObject> equipedItems = new Dictionary<string, GameObject>();
+
         private void Awake()
         {
             ApplyColors();
+        }
+
+        public void ApplyEquipedItems(ItemObject[] items)
+        {
+            foreach (var key in equipedItems.Keys)
+            {
+                Destroy(equipedItems[key]);
+            }
+            equipedItems.Clear();
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                var item = items[i];
+                if(item == null)
+                    continue;
+                CreateItem(item.Id);
+            }
+        }
+
+        private void CreateItem(string id){
+            ItemManager itemManager = FindObjectOfType<ItemManager>();
+            var itemVisualData = itemManager.GetItemVisualData(id);
+            GameObject go = new GameObject($"item_{itemVisualData.Id}");
+            foreach(var anchor in bodyPartAnchors){
+                if(anchor.Type == itemVisualData.AnchorType){
+                    go.transform.SetParent(anchor.Transform);
+                    go.transform.localPosition = Vector3.zero;
+                    go.transform.localScale = Vector3.one;
+                }
+            }
+
+            var renderer = go.AddComponent<SpriteRenderer>();
+            renderer.sprite = itemVisualData.Sprite;
+            renderer.sortingOrder = itemVisualData.LayerOrder;
+
+            equipedItems.Add(id, go);
         }
 
         private void ApplyColors()
@@ -56,6 +98,19 @@ namespace MO.Character.BodyAspect
         public string Name => Type.ToString();
         public SpriteRenderer Renderer;
         public BodyPartType Type;
+    }
+
+    [Serializable]
+    public struct BodyPartAnchor{
+        public BodyPartAnchorType Type;
+        public Transform Transform;
+        public int LayerOrder;
+    }
+
+    public enum BodyPartAnchorType{
+        None = 0,
+        BottomHead = 1,
+        TopHead = 2,
     }
 }
 
