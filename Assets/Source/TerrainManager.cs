@@ -11,13 +11,17 @@ public class TerrainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.Network.GetTerrain();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void Load(){
+        GameManager.Instance.Network.GetTerrain();
     }
 
     public void SetTerrain(Terrain remoteTerrain)

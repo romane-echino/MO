@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CursorManager Cursor { get; private set; }
     public TerrainManager Terrain { get; private set; }
     public EnnemyManager Ennemies { get; private set; }
+    public AuthenticationManager Auth { get; private set; }
 
     private GameObject DebugUI { get; set; }
     private bool showDebugUI = false;
@@ -34,11 +35,18 @@ public class GameManager : MonoBehaviour
         Cursor = GetComponentInChildren<CursorManager>();
         Ennemies = GetComponentInChildren<EnnemyManager>();
         Terrain = GetComponentInChildren<TerrainManager>();
-
+        Auth = GetComponentInChildren<AuthenticationManager>();
+/*
         var debugUITransform = transform.Find("DebugUI");
         DebugUI = debugUITransform.gameObject;
         var go = debugUITransform.Find("Ping");
-        PingText = debugUITransform.Find("Ping").GetComponentInChildren<Text>(true);
+        PingText = debugUITransform.Find("Ping").GetComponentInChildren<Text>(true);*/
+    }
+
+    public void StartGame(){
+        Network.Connect();
+        Terrain.Load();
+        Ennemies.Load();
     }
 
     void Start()
@@ -56,10 +64,10 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Time.time >= _nextTime)
+        /*if (Time.time >= _nextTime)
         {
             PingText.text = "Ping : " + Network.Ping.ToString();
             _nextTime += _interval;
-        }
+        }*/
     }
 }

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
@@ -20,6 +21,7 @@ const uuid_1 = require("uuid");
 const mongodb_1 = require("mongodb");
 const Ennemy_1 = require("./models/Ennemy");
 const Map_1 = require("./models/Map");
+const Authentication_1 = require("./controllers/Authentication");
 var port = 3001;
 if (process.env.PORT) {
     port = parseInt(process.env.PORT);
@@ -28,24 +30,27 @@ class App {
     constructor(port) {
         this._users = {};
         this.port = port;
-        const app = (0, express_1.default)();
-        app.get('/', (req, res) => {
+        this.app = (0, express_1.default)();
+        this.app.use(body_parser_1.default.json());
+        this.app.use(body_parser_1.default.urlencoded({ extended: false }));
+        this.auth = new Authentication_1.Authentication();
+        this.app.get('/', (req, res) => {
             return res.send('Hello world');
         });
-        app.get('/users', (req, res) => {
+        this.app.get('/users', (req, res) => {
             console.log('retrieving users list');
             return res.json(this._users);
         });
-        app.get('/map', (req, res) => {
+        this.app.get('/map', (req, res) => {
             console.log('retrieving map');
             return res.json(this._map);
         });
-        app.get('/eny', (req, res) => {
+        this.app.get('/eny', (req, res) => {
             console.log('retrieving ennemies');
             return res.json(Object.values(this._ennemies));
         });
         console.log('path', path_1.default.join(__dirname, 'public'));
-        this.server = new http_1.default.Server(app);
+        this.server = new http_1.default.Server(this.app);
         this.io = new socket_io_1.default.Server(this.server, {
             pingInterval: 10000,
             pingTimeout: 5000
@@ -102,6 +107,11 @@ class App {
         });
         this._map = new Map_1.Terrain();
         this._ennemies = {};
+        process.on('exit', this.gracefulShutdown);
+        process.on('SIGINT', this.gracefulShutdown);
+        process.on('SIGTERM', this.gracefulShutdown);
+        process.on('SIGKILL', this.gracefulShutdown);
+        process.on('uncaughtException', this.gracefulShutdown);
     }
     Start() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -131,11 +141,17 @@ class App {
             try {
                 yield this.dbClient.connect();
                 yield this.dbClient.db("admin").command({ ping: 1 });
-                console.log("Pinged your deployment. You successfully connected to MongoDB!");
+                this.db = this.dbClient.db('mo-database');
+                console.log("Mongo::Init");
+                this.auth.Init(this.app, this.db);
             }
             finally {
-                yield this.dbClient.close();
             }
+        });
+    }
+    gracefulShutdown() {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.dbClient.close();
         });
     }
 }

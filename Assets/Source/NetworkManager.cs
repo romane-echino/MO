@@ -7,11 +7,12 @@ using SocketIOClient.Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using System.Text;
 
 public class NetworkManager : MonoBehaviour
 {
-    //private string URI = "http://localhost:3001";
-    private string URI = "https://mo-server.herokuapp.com";
+    private string URI = "http://localhost:3001";
+    //private string URI = "https://mo-server.herokuapp.com";
     public SocketIOUnity socket;
     public double Ping = 0;
     public string playerId;
@@ -37,10 +38,8 @@ public class NetworkManager : MonoBehaviour
         socket.JsonSerializer = new NewtonsoftJsonSerializer();
     }
 
-    void Start()
+    public void Connect()
     {
-
-
         ///// reserved socketio events
         socket.OnConnected += (sender, e) =>
         {
@@ -123,6 +122,48 @@ public class NetworkManager : MonoBehaviour
         socket.Connect();
     }
 
+    void Start()
+    {
+
+
+
+    }
+
+    IEnumerator PostRequest(string uri, string json, Action<string> callback)
+    {
+        byte[] rawBody = Encoding.UTF8.GetBytes(json);
+
+        using (UnityWebRequest webRequest = new UnityWebRequest(uri, "POST"))
+        {
+            webRequest.uploadHandler = new UploadHandlerRaw(rawBody);
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("accept", "application/json");
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
+
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    yield return webRequest.downloadHandler.text;
+                    callback(webRequest.downloadHandler.text);
+                    break;
+            }
+        }
+    }
+
     IEnumerator GetRequest(string uri, Action<string> callback)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -171,6 +212,33 @@ public class NetworkManager : MonoBehaviour
                 GameManager.Instance.Ennemies.SetEnnemies(result);
             }));
     }
+
+    public void Authenticate(Authentication auth)
+    {
+
+        var json = JsonConvert.SerializeObject(auth);
+        StartCoroutine(PostRequest(this.URI + "/login", json,
+        (string json) =>
+            {
+                Debug.Log("json" + json);
+                var result = JsonConvert.DeserializeObject<User>(json);
+                Debug.Log("res" + result.username);
+                GameManager.Instance.Auth.SetLogin(result);
+            }));
+    }
+
+    public void Register(Authentication auth)
+    {
+        var json = JsonConvert.SerializeObject(auth);
+        StartCoroutine(PostRequest(this.URI + "/register", json,
+        (string json) =>
+            {
+                var result = JsonConvert.DeserializeObject<User>(json);
+                GameManager.Instance.Auth.SetLogin(result);
+    
+            }));
+    }
+
     public void EmitMovement(Vector3 position)
     {
         var json = JsonUtility.ToJson(new PlayerMovement(position, this.playerId));

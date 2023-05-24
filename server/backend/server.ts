@@ -1,4 +1,6 @@
 import express, { Express } from 'express'
+import bodyParser from 'body-parser'
+
 import path from 'path'
 import http from 'http'
 import socketIO from 'socket.io'
@@ -45,7 +47,7 @@ class App {
     private db?: Db;
 
 
-    private auth:Authentication;
+    private auth: Authentication;
 
     private _map: Terrain;
     private _ennemies: {
@@ -61,11 +63,13 @@ class App {
 
     constructor(port: number) {
         this.port = port;
-        this.app = express()
+        this.app = express();
+        this.app.use(bodyParser.json())
+        this.app.use(bodyParser.urlencoded({ extended: false }))
         //this.app.use(express.static(path.join(__dirname, '../public')))
 
         this.auth = new Authentication();
-        
+
 
         this.app.get('/', (req, res) => {
             return res.send('Hello world')
@@ -162,6 +166,17 @@ class App {
 
         this._map = new Terrain();
         this._ennemies = {};
+
+        // This will handle process.exit():
+        process.on('exit', this.gracefulShutdown);
+
+        // This will handle kill commands, such as CTRL+C:
+        process.on('SIGINT', this.gracefulShutdown);
+        process.on('SIGTERM', this.gracefulShutdown);
+        process.on('SIGKILL', this.gracefulShutdown);
+
+        // This will prevent dirty exit on code-fault crashes:
+        process.on('uncaughtException', this.gracefulShutdown);
     }
 
     public async Start() {
@@ -209,16 +224,20 @@ class App {
             await this.dbClient.connect();
             // Send a ping to confirm a successful connection
             await this.dbClient.db("admin").command({ ping: 1 });
+            this.db = this.dbClient.db('mo-database');
+            console.log("Mongo::Init");
 
-            let db = this.dbClient.db("mo-db");
-            this.db = db;
             this.auth.Init(this.app, this.db);
 
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");
+            
         } finally {
             // Ensures that the client will close when you finish/error
-            await this.dbClient.close();
+            //await this.dbClient.close();
         }
+    }
+
+    async gracefulShutdown() {
+        await this.dbClient.close();
     }
 }
 

@@ -11,6 +11,11 @@ public class EnnemyManager : MonoBehaviour
     public Dictionary<string, Transform> Ennemies { get; private set; } = new Dictionary<string, Transform>();
     void Start()
     {
+        
+    }
+
+
+    public void Load(){
         GameManager.Instance.Network.GetEnnemies();
         ConnectSocketFunctions();
     }

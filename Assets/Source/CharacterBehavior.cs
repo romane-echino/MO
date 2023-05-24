@@ -34,7 +34,15 @@ public partial class CharacterBehavior : MonoBehaviour
         this.PlayerId = id;
         this.IsLocal = isLocal;
 
-        characterName = $"Player {id}";
+        if (isLocal)
+        {
+            characterName = GameManager.Instance.Auth.user.username;
+        }
+        else
+        {
+            characterName = $"Player {id}";
+        }
+
         level = 1;
         maxLife = 10;
         currentLife = 10;
