@@ -1,12 +1,14 @@
-import express from 'express'
+import express, { Express } from 'express'
 import path from 'path'
 import http from 'http'
 import socketIO from 'socket.io'
 import { v4 as uuidv4 } from 'uuid';
+import { MongoClient, ServerApiVersion, Db } from 'mongodb'
 
 import { Ennemy, EnnemyEventType, EnnemyType, getEnnemy } from './models/Ennemy';
 import { Terrain, Tile, TileType } from './models/Map';
 import { Vector2 } from './models/Utils';
+import { Authentication } from './controllers/Authentication';
 
 var port: number = 3001;
 
@@ -34,9 +36,16 @@ interface attackData {
 }
 
 class App {
+    private app: Express;
     private server: http.Server
     private port: number
     private io: socketIO.Server
+
+    private dbClient: MongoClient;
+    private db?: Db;
+
+
+    private auth:Authentication;
 
     private _map: Terrain;
     private _ennemies: {
@@ -51,33 +60,35 @@ class App {
     } = {}
 
     constructor(port: number) {
-        this.port = port
+        this.port = port;
+        this.app = express()
+        //this.app.use(express.static(path.join(__dirname, '../public')))
 
-        const app = express()
-        //app.use(express.static(path.join(__dirname, '../public')))
+        this.auth = new Authentication();
+        
 
-        app.get('/', (req, res) => {
+        this.app.get('/', (req, res) => {
             return res.send('Hello world')
         })
 
-        app.get('/users', (req, res) => {
+        this.app.get('/users', (req, res) => {
             console.log('retrieving users list')
             return res.json(this._users);
         })
 
-        app.get('/map', (req, res) => {
+        this.app.get('/map', (req, res) => {
             console.log('retrieving map')
             return res.json(this._map);
         })
 
-        app.get('/eny', (req, res) => {
+        this.app.get('/eny', (req, res) => {
             console.log('retrieving ennemies')
             return res.json(Object.values(this._ennemies));
         })
 
         console.log('path', path.join(__dirname, 'public'))
 
-        this.server = new http.Server(app)
+        this.server = new http.Server(this.app)
         this.io = new socketIO.Server(this.server, {
             pingInterval: 10000,
             pingTimeout: 5000
@@ -137,11 +148,23 @@ class App {
             })
         })
 
+        let uri = "mongodb+srv://mo-admin:VadeMetro2023;@mo-db.184rodz.mongodb.net/?retryWrites=true&w=majority";
+
+        this.dbClient = new MongoClient(uri,
+            {
+                serverApi: {
+                    version: ServerApiVersion.v1,
+                    strict: true,
+                    deprecationErrors: true,
+                }
+            }
+        );
+
         this._map = new Terrain();
         this._ennemies = {};
     }
 
-    public Start() {
+    public async Start() {
         this.server.listen(this.port)
         console.log(`Server listening on port ${this.port}.`)
 
@@ -179,6 +202,23 @@ class App {
         });
 
         this._ennemies[eny.Id] = eny;
+
+
+        try {
+            // Connect the client to the server	(optional starting in v4.7)
+            await this.dbClient.connect();
+            // Send a ping to confirm a successful connection
+            await this.dbClient.db("admin").command({ ping: 1 });
+
+            let db = this.dbClient.db("mo-db");
+            this.db = db;
+            this.auth.Init(this.app, this.db);
+
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");
+        } finally {
+            // Ensures that the client will close when you finish/error
+            await this.dbClient.close();
+        }
     }
 }
 

@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,6 +17,7 @@ const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const uuid_1 = require("uuid");
+const mongodb_1 = require("mongodb");
 const Ennemy_1 = require("./models/Ennemy");
 const Map_1 = require("./models/Map");
 var port = 3001;
@@ -73,6 +83,7 @@ class App {
                         }
                     });
                 });
+                socket.broadcast.emit('remoteattack', data.id);
             });
             socket.on('disconnect', () => {
                 console.log('socket disconnected : ' + socket.id);
@@ -81,33 +92,51 @@ class App {
                 console.log(`user disconnected`, this._users);
             });
         });
+        let uri = "mongodb+srv://mo-admin:VadeMetro2023;@mo-db.184rodz.mongodb.net/?retryWrites=true&w=majority";
+        this.dbClient = new mongodb_1.MongoClient(uri, {
+            serverApi: {
+                version: mongodb_1.ServerApiVersion.v1,
+                strict: true,
+                deprecationErrors: true,
+            }
+        });
         this._map = new Map_1.Terrain();
         this._ennemies = {};
     }
     Start() {
-        this.server.listen(this.port);
-        console.log(`Server listening on port ${this.port}.`);
-        let mapData = {};
-        for (let x = -10; x <= 10; x++) {
-            for (let y = -10; y <= 10; y++) {
-                let type = Map_1.TileType.UNKNOWN;
-                if (y === 0 && x === 0) {
-                    type = Map_1.TileType.WATER;
+        return __awaiter(this, void 0, void 0, function* () {
+            this.server.listen(this.port);
+            console.log(`Server listening on port ${this.port}.`);
+            let mapData = {};
+            for (let x = -10; x <= 10; x++) {
+                for (let y = -10; y <= 10; y++) {
+                    let type = Map_1.TileType.UNKNOWN;
+                    if (y === 0 && x === 0) {
+                        type = Map_1.TileType.WATER;
+                    }
+                    else {
+                        type = Map_1.TileType.GRASS;
+                    }
+                    mapData[`${x}_${y}`] = {
+                        TileType: type
+                    };
                 }
-                else {
-                    type = Map_1.TileType.GRASS;
-                }
-                mapData[`${x}_${y}`] = {
-                    TileType: type
-                };
             }
-        }
-        this._map.Load(mapData);
-        let eny = (0, Ennemy_1.getEnnemy)(Ennemy_1.EnnemyType.Dummy, 3, 3, (t, id, a) => {
-            console.log('event from eny', t.toString());
-            this.io.emit(`ennemy${t.toString()}`, { id, a });
+            this._map.Load(mapData);
+            let eny = (0, Ennemy_1.getEnnemy)(Ennemy_1.EnnemyType.Dummy, 3, 3, (t, id, a) => {
+                console.log('event from eny', t.toString());
+                this.io.emit(`ennemy${t.toString()}`, { id, a });
+            });
+            this._ennemies[eny.Id] = eny;
+            try {
+                yield this.dbClient.connect();
+                yield this.dbClient.db("admin").command({ ping: 1 });
+                console.log("Pinged your deployment. You successfully connected to MongoDB!");
+            }
+            finally {
+                yield this.dbClient.close();
+            }
         });
-        this._ennemies[eny.Id] = eny;
     }
 }
 new App(port).Start();

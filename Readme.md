@@ -92,3 +92,57 @@ Le late-game qui tourne en rond
 - Saut (Emote)
 - PNJ
 - Degat
+
+
+# Notes
+Le personnage commence devant 3 tombes
+Choisi entre 3 choix avec des stats aléatoire
+Liste non exhaustives de jobs (métier) :
+- Bucheronnage
+- Gathering (Récolte plante,baie,...)
+- Warrior
+- Archer
+- ...
+
+Un métier à une barre de progression avec des niveaux
+Chaque niveau donne un bonus
+Certains niveau sont des "jalons" qui donnent de plus gros bonus, un titre et d'une façon encore flou (quête) un outil ou encore une nouvelle abilité (skill)
+Voilà comment se décrirait la progression d'un bucheron :
+- A la main (inculte) +2 dégat buche
+- Hache en bois (apprenti)
+- Hache en pierre (artisan)
+- Hache en fer (??)
+- Hache en acier (expert)
+- Hache double (maitre)
+
+QTE ou AOE pour tout type d'ennemi (arbre, buisson)?
+Quete globale (AQ)
+Quete journalière
+Quête hebomadaire
+Quête durant la journée à temps précis (Masque matrimonial Majoras mask)
+
+Evolution de la map (pour tout le monde)
+Housing (Emplacements définis)
+
+Les mobs donnent des gold et des scrap
+Il n'y a pas de centimes de gold 
+100 scrap donne 1 gold
+On peut transformer les scrap en autre composant de métier (100 scrap === 10 iron)
+
+1 Case d'inventaire par métier
+64 première case de l'inv pour le perso (équipé)
+12 case pour le sac 4x3
++ 1x4 ralenti de 20%
++ 1x4 relenti de 40%
+
+On choisi l'arme avec la scroll wheel
+armes n'ont pas de dégat => les dégats sont basé sur le niveau de métier
+les armes on des bonus de métier qui augemente la compétence ou qui améliore le métier (20+ récolte, CD réduit de 10%)
+
+Quand on meurs on perd le scrap
+
+On peut séléctionner des ennemies et avoir une attack auto avec le métier séléctionné
+
+mo-admin
+VadeMetro2023;
+

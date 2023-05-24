@@ -1,3 +1,5 @@
+import { Express } from 'express'
+
 export class Vector2 {
     x: number;
     y: number;
