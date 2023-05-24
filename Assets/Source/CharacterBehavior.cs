@@ -3,13 +3,15 @@ using MO.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MO.Character.BodyAspect;
 
 public partial class CharacterBehavior : MonoBehaviour
 {
     public string PlayerId { get; private set; }
     public bool IsLocal { get; private set; }
 
-    public MO.Character.BodyAspect.CharacterAppeareance Appeareance;
+    [field:SerializeField]
+    public CharacterAppeareance Appeareance {get; private set;}
 
     [Header("Animation")]
     public float DisplacementLimitToMove = 0.01f;
