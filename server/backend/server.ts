@@ -1,5 +1,6 @@
 import express, { Express } from 'express'
 import bodyParser from 'body-parser'
+import 'dotenv/config';
 
 import path from 'path'
 import http from 'http'
@@ -159,9 +160,9 @@ class App {
             })
         })
 
-        let uri = "mongodb+srv://mo-admin:VadeMetro2023;@mo-db.184rodz.mongodb.net/?retryWrites=true&w=majority";
+        let uri = process.env.dbcs;
 
-        this.dbClient = new MongoClient(uri,
+        this.dbClient = new MongoClient(uri!,
             {
                 serverApi: {
                     version: ServerApiVersion.v1,

@@ -76,3 +76,5 @@ crashlytics-build.properties
 /server/backend/node_modules
 /server/client/package-lock.json
 /server/backend/package-lock.json
+server/backend/package-lock.json
+server/backend/.env

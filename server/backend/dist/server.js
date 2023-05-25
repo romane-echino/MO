@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+require("dotenv/config");
 const path_1 = __importDefault(require("path"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
@@ -73,9 +74,14 @@ class App {
             }, 1000);
             socket.on('move', (d) => {
                 let data = JSON.parse(d);
-                this._users[socket.id].lastPosition.x = data.x;
-                this._users[socket.id].lastPosition.y = data.y;
-                socket.broadcast.emit('remotemove', data);
+                try {
+                    this._users[socket.id].lastPosition.x = data.x;
+                    this._users[socket.id].lastPosition.y = data.y;
+                    socket.broadcast.emit('remotemove', data);
+                }
+                catch (e) {
+                    console.log('error on move!?');
+                }
             });
             socket.on('attack', (d) => {
                 let data = JSON.parse(d);
@@ -97,7 +103,7 @@ class App {
                 console.log(`user disconnected`, this._users);
             });
         });
-        let uri = "mongodb+srv://mo-admin:VadeMetro2023;@mo-db.184rodz.mongodb.net/?retryWrites=true&w=majority";
+        let uri = process.env.dbcs;
         this.dbClient = new mongodb_1.MongoClient(uri, {
             serverApi: {
                 version: mongodb_1.ServerApiVersion.v1,
@@ -107,11 +113,6 @@ class App {
         });
         this._map = new Map_1.Terrain();
         this._ennemies = {};
-        process.on('exit', this.gracefulShutdown);
-        process.on('SIGINT', this.gracefulShutdown);
-        process.on('SIGTERM', this.gracefulShutdown);
-        process.on('SIGKILL', this.gracefulShutdown);
-        process.on('uncaughtException', this.gracefulShutdown);
     }
     Start() {
         return __awaiter(this, void 0, void 0, function* () {
