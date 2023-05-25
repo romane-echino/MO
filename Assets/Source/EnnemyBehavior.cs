@@ -45,8 +45,11 @@ public class EnnemyBehavior : MonoBehaviour
 
     public void Hit(int currentLife)
     {
+        int delta = this.currentLife - currentLife;
         animator.SetTrigger("Hit");
         entityUI.UpdateLife(currentLife);
+        entityUI.ShowDamageText(delta);
+        this.currentLife = currentLife;
     }
 
     public void Die()

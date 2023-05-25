@@ -411,6 +411,7 @@ MonoBehaviour:
   AllySprite: {fileID: 734353921, guid: 231fd5366b67db343bff7c419f325970, type: 3}
   EnemySprite: {fileID: 1944890858, guid: 231fd5366b67db343bff7c419f325970, type: 3}
   NeutralSprite: {fileID: 1230595655, guid: 231fd5366b67db343bff7c419f325970, type: 3}
+  CombatTextPrefab: {fileID: 7923671714420994763, guid: a586fcc1b4961864e961de281522fd09, type: 3}
   container: {fileID: 1566382065449358088}
   canvasGroup: {fileID: 4873273945573701567}
   entityName: {fileID: 1566382065458330918}

@@ -19,6 +19,8 @@ namespace MO.UI
         public bool IsVisible { get; private set; } = false;
 
         [Header("References"), SerializeField]
+        public GameObject CombatTextPrefab;
+        [SerializeField]
         private GameObject container;
         [SerializeField]
         private CanvasGroup canvasGroup;
@@ -43,6 +45,11 @@ namespace MO.UI
         public void Show()
         {
             IsVisible = true;
+        }
+
+        public void ShowDamageText(int delta)
+        {
+            Instantiate(CombatTextPrefab, transform.parent).GetComponent<CombatTextBehaviour>().ShowText(delta.ToString());
         }
 
         public void Hide()
