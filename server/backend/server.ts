@@ -1,7 +1,6 @@
 import express, { Express } from 'express'
 import bodyParser from 'body-parser'
 import 'dotenv/config';
-
 import path from 'path'
 import http from 'http'
 import socketIO from 'socket.io'
