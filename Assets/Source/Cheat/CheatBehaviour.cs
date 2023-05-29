@@ -25,4 +25,19 @@ public class CheatBehaviour : MonoBehaviour {
             }
         }
     }
+
+    [ContextMenu("Equip Bow")]
+    public void EquipItem3()
+    {
+        ItemObject bow = new ItemObject() { Id = "4", Type = ItemType.EquipedWeapon };
+        InventoryManager.Instance.Equip(bow);
+        var players = FindObjectsOfType<CharacterBehavior>();
+        foreach (var player in players)
+        {
+            if (player.IsLocal)
+            {
+                player.EquipItems(InventoryManager.Instance.Slots);
+            }
+        }
+    }
 }
