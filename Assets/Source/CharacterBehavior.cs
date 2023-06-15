@@ -56,7 +56,8 @@ public partial class CharacterBehavior : MonoBehaviour
         entityUI.Show();
     }
 
-    public void EquipItems(ItemObject[] slots){
+    public void EquipItems(ItemObject[] slots)
+    {
         equipedItemsSlots = slots;
         appeareance.ApplyEquipedItems(slots);
     }

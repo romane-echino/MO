@@ -70,13 +70,13 @@ namespace MO.Character.BodyAspect
                 case BodyPartType.Head:
                     return (2, colors.SkinColor, colors.DarkSkinColor);
                 case BodyPartType.ArmL:
-                    return (1, colors.SkinColor, Color.magenta);
                 case BodyPartType.ArmR:
-                    return (1, colors.SkinColor, Color.magenta);
+                    return (1, colors.DarkSkinColor, Color.magenta);
+                    return (1, colors.DarkSkinColor, Color.magenta);
                 case BodyPartType.ForearmL:
-                    return (1, colors.DarkSkinColor, Color.magenta);
                 case BodyPartType.ForearmR:
-                    return (1, colors.DarkSkinColor, Color.magenta);
+                    return (1, colors.SkinColor, Color.magenta);
+                    return (1, colors.SkinColor, Color.magenta);
                 case BodyPartType.UpperBody:
                     return (1, colors.UpperBodyColor, Color.magenta);
                 case BodyPartType.LowerBody:

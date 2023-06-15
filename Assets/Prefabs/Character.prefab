@@ -1223,7 +1223,7 @@ GameObject:
   - component: {fileID: 4857809472481278109}
   - component: {fileID: 3836719768215605614}
   m_Layer: 0
-  m_Name: HandL
+  m_Name: HandR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1392,6 +1392,7 @@ GameObject:
   - component: {fileID: 9093634228782779009}
   - component: {fileID: 2639260659950746367}
   - component: {fileID: 827087056189864772}
+  - component: {fileID: 1865439280482190603}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1452,7 +1453,7 @@ MonoBehaviour:
   Texture: {fileID: 2800000, guid: d3aba6606416e104888cd49bb8c43eb7, type: 3}
   BodyPartData: {fileID: 11400000, guid: 7671a1ad0f17a2e429a385adcc46f744, type: 2}
   Colors: {fileID: 11400000, guid: 170175e605e7ce74e9ca9424325d6d19, type: 2}
-  HiddenBodyParts: 0f00000010000000
+  HiddenBodyParts: 0f000000
   bodyPartRenderers:
   - Renderer: {fileID: 8418406806675300197}
     Type: 0
@@ -1486,6 +1487,8 @@ MonoBehaviour:
     Type: 14
   - Renderer: {fileID: 8922721213095076148}
     Type: 15
+  - Renderer: {fileID: 3836719768215605614}
+    Type: 16
   bodyPartAnchors:
   - Type: 1
     Transform: {fileID: 5691153982150791191}
@@ -1496,6 +1499,22 @@ MonoBehaviour:
   - Type: 3
     Transform: {fileID: 5845423023009791640}
     LayerOrder: -75
+  - Type: 4
+    Transform: {fileID: 4857809472481278109}
+    LayerOrder: -75
+--- !u!114 &1865439280482190603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795709019435342375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e397dac31388c4290a88ef71db82ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appareance: {fileID: 827087056189864772}
 --- !u!1 &7280856935170340470
 GameObject:
   m_ObjectHideFlags: 0

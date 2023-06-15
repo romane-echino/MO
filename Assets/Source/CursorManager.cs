@@ -9,28 +9,45 @@ public class CursorManager : MonoBehaviour
     public Texture2D attackCursor;
 
     private bool needUpdate = true;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+    public CursorType actualCursor = CursorType.None;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        CursorType newCursor = CursorType.None;
         if (GameManager.Instance.Attack.IsPreparing())
         {
-            needUpdate = true;
-            Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.ForceSoftware);
+            newCursor = CursorType.Attack;
         }
         else
         {
-            if (needUpdate)
-            {
-                Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.ForceSoftware);
-                needUpdate = false;
-            }
-
+            newCursor = CursorType.Default;
         }
+
+        if(newCursor != actualCursor)
+        {
+            switch (newCursor)
+            {
+                case CursorType.None:
+                    break;
+                case CursorType.Default:
+                    Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+                    break;
+                case CursorType.Attack:
+                    Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.Auto);
+                    break;
+                default:
+                    break;
+            }
+            actualCursor = newCursor;
+        }
+    }
+
+    public enum CursorType
+    {
+
+        None = 0,
+        Default = 1,
+        Attack = 2,
     }
 }

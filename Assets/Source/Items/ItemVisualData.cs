@@ -17,6 +17,9 @@ namespace MO.Item
         
         public List<BodyPartType> VisibleBodyParts = new List<BodyPartType>();
         public AnimationAttackType AnimationAttackType;
+
+        public bool ShootProjectile = false;
+        public string ProjectileId;
     }
 }
 

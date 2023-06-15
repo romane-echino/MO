@@ -424,7 +424,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
   m_PositionCurves: []
   m_ScaleCurves: []
   m_FloatCurves: []
@@ -472,7 +472,7 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1379285178
+      path: 2822309337
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -1710,7 +1710,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1747,7 +1747,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1784,7 +1784,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -1945,7 +1945,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1955,7 +1955,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1965,21 +1965,21 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Visuals/UpperBody/ArmR/ForearmR/HandL
+    path: Visuals/UpperBody/ArmR/ForearmR/HandR
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.38333333
-    functionName: 
+    functionName: SpawnProjectile
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.15
-    functionName: 
+    functionName: LaunchProjectile
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

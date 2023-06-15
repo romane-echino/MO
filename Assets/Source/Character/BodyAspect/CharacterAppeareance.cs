@@ -16,6 +16,8 @@ namespace MO.Character.BodyAspect
 
         public List<BodyPartType> HiddenBodyParts = new List<BodyPartType>();
 
+        public ItemObject EquipedWeapon { get; private set; } = null;
+
         [SerializeField, Header("References")]
         private List<BodyPartRenderer> bodyPartRenderers = new List<BodyPartRenderer>();
 
@@ -23,6 +25,7 @@ namespace MO.Character.BodyAspect
         private List<BodyPartAnchor> bodyPartAnchors = new List<BodyPartAnchor>();
 
         private Dictionary<string, GameObject> equipedItems = new Dictionary<string, GameObject>();
+
 
         private void Awake()
         {
@@ -38,17 +41,22 @@ namespace MO.Character.BodyAspect
             }
             equipedItems.Clear();
             HideBodyPart();
+            EquipedWeapon = null;
 
             for (int i = 0; i < items.Length; i++)
             {
                 var item = items[i];
                 if(item == null)
                     continue;
-                CreateItem(item.Id);
+                if (i == (int)ItemType.EquipedWeapon)
+                    EquipedWeapon = item;
+
+                var newGameObject = CreateItem(item.Id);
+                equipedItems.Add(item.Id, newGameObject);
             }
         }
 
-        private void CreateItem(string id){
+        public GameObject CreateItem(string id){
             ItemManager itemManager = FindObjectOfType<ItemManager>();
             var itemVisualData = itemManager.GetItemVisualData(id);
             GameObject go = new GameObject($"item_{itemVisualData.Id}");
@@ -71,8 +79,7 @@ namespace MO.Character.BodyAspect
                     bodyPartRenderers.First(x => x.Type == bodypart).Renderer.gameObject.SetActive(true);
                 }
             }
-
-            equipedItems.Add(id, go);
+            return go;
         }
 
         private void ApplyColors()

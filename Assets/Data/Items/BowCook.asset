@@ -19,3 +19,5 @@ MonoBehaviour:
   LayerOrder: 0
   VisibleBodyParts: 0f000000
   AnimationAttackType: 2
+  ShootProjectile: 1
+  ProjectileId: 5
