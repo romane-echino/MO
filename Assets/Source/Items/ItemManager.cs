@@ -10,10 +10,10 @@ namespace MO.Item
     public class ItemManager : Singleton<ItemManager> {
         
         [SerializeField]
-        private List<ItemVisualData> itemVisualDatas = new List<ItemVisualData>();
-        public IEnumerable<ItemVisualData> ItemVisualDatas => itemVisualDatas;
+        private List<ItemGroupVisualData> itemVisualDatas = new List<ItemGroupVisualData>();
+        public IEnumerable<ItemGroupVisualData> ItemVisualDatas => itemVisualDatas;
 
-        private Dictionary<string, ItemVisualData> ItemPerKey = new Dictionary<string, ItemVisualData>();
+        private Dictionary<string, ItemGroupVisualData> ItemPerKey = new Dictionary<string, ItemGroupVisualData>();
 
         protected override void Awake() {
             base.Awake();
@@ -23,13 +23,13 @@ namespace MO.Item
             }
         }
 
-        public ItemVisualData GetItemVisualData(string id) => ItemPerKey[id];
+        public ItemGroupVisualData GetItemVisualData(string id) => ItemPerKey[id];
 
 #if UNITY_EDITOR
         [ContextMenu("Find all item visual data")]
         private void FindAllItemOnEditor()
         {
-            var datas = GetAllInstances<ItemVisualData>();
+            var datas = GetAllInstances<ItemGroupVisualData>();
             itemVisualDatas = datas.ToList();
             UnityEditor.EditorUtility.SetDirty(this);
         }

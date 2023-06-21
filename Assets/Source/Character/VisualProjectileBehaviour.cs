@@ -19,7 +19,7 @@ namespace MO.Character
            var itemVisualData = ItemManager.Instance.GetItemVisualData(appareance.EquipedWeapon.Id);
             if (itemVisualData == null || itemVisualData.ShootProjectile == false)
                 return;
-            projectile = appareance.CreateItem(itemVisualData.ProjectileId);
+            projectile = appareance.CreateItem(itemVisualData.ProjectileData);
         }
 
         public void LaunchProjectile()

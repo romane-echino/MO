@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0125f93b212bd77429447fa8a0341b96, type: 3}
-  m_Name: BycoketVisualData
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  Id: 1
-  Sprite: {fileID: 21300000, guid: fa321e7be1915944aa717d7f868c744d, type: 3}
-  AnchorType: 2
-  LayerOrder: 105
+  Sprite: {fileID: 21300000, guid: 0a3dae70c3b72cd4cb52f9b444ebf24c, type: 3}
+  AnchorType: 4
+  UseSpecificLayerOrder: 1
+  LayerOrder: 125
+  VisibleBodyParts: 

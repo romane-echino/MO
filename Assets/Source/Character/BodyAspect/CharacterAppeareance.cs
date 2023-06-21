@@ -24,7 +24,7 @@ namespace MO.Character.BodyAspect
         [SerializeField]
         private List<BodyPartAnchor> bodyPartAnchors = new List<BodyPartAnchor>();
 
-        private Dictionary<string, GameObject> equipedItems = new Dictionary<string, GameObject>();
+        private Dictionary<string, List<GameObject>> equipedItems = new Dictionary<string, List<GameObject>>();
 
 
         private void Awake()
@@ -37,11 +37,16 @@ namespace MO.Character.BodyAspect
         {
             foreach (var key in equipedItems.Keys)
             {
-                Destroy(equipedItems[key]);
+                for (int i = equipedItems[key].Count - 1; i >= 0; i--)
+                {
+                    Destroy(equipedItems[key][i]);
+                }
             }
             equipedItems.Clear();
             HideBodyPart();
             EquipedWeapon = null;
+
+            ItemManager itemManager = FindObjectOfType<ItemManager>();
 
             for (int i = 0; i < items.Length; i++)
             {
@@ -51,15 +56,22 @@ namespace MO.Character.BodyAspect
                 if (i == (int)ItemType.EquipedWeapon)
                     EquipedWeapon = item;
 
-                var newGameObject = CreateItem(item.Id);
-                equipedItems.Add(item.Id, newGameObject);
+                var itemVisualGroupData = itemManager.GetItemVisualData(item.Id);
+                List<GameObject> gameObjects = new List<GameObject>();
+                for (int j = 0; j < itemVisualGroupData.items.Count; j++)
+                {
+                    var visualPart = itemVisualGroupData.items[j];
+                    var newPart = CreateItem(visualPart);
+                    gameObjects.Add(newPart);
+                }
+                
+                equipedItems.Add(item.Id, gameObjects);
             }
         }
 
-        public GameObject CreateItem(string id){
-            ItemManager itemManager = FindObjectOfType<ItemManager>();
-            var itemVisualData = itemManager.GetItemVisualData(id);
-            GameObject go = new GameObject($"item_{itemVisualData.Id}");
+        public GameObject CreateItem(ItemVisualData itemVisualData)
+        {
+            GameObject go = new GameObject($"item_{itemVisualData.name}");
 
             BodyPartAnchor anchor = bodyPartAnchors.First(x => x.Type == itemVisualData.AnchorType);
 

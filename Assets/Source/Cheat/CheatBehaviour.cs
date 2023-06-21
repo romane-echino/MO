@@ -1,7 +1,9 @@
 using UnityEngine;
 using MO.Item;
 public class CheatBehaviour : MonoBehaviour {
-    
+
+    public int ItemId = 5;
+
     [ContextMenu("Equip Helmet")]
     public void EquipItem(){
         ItemObject helmet = new ItemObject(){Id = "0", Type = ItemType.Head};
@@ -31,6 +33,21 @@ public class CheatBehaviour : MonoBehaviour {
     {
         ItemObject bow = new ItemObject() { Id = "4", Type = ItemType.EquipedWeapon };
         InventoryManager.Instance.Equip(bow);
+        var players = FindObjectsOfType<CharacterBehavior>();
+        foreach (var player in players)
+        {
+            if (player.IsLocal)
+            {
+                player.EquipItems(InventoryManager.Instance.Slots);
+            }
+        }
+    }
+
+    [ContextMenu("Equip Item X")]
+    public void EquipItemX()
+    {
+        ItemObject item = new ItemObject() { Id = ItemId.ToString(), Type = ItemType.EquipedWeapon };
+        InventoryManager.Instance.Equip(item);
         var players = FindObjectsOfType<CharacterBehavior>();
         foreach (var player in players)
         {
