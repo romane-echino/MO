@@ -8,7 +8,12 @@ using System.Linq;
 namespace MO.Item
 {
     public class ItemManager : Singleton<ItemManager> {
-        
+
+        [Header("Reference")]
+        [SerializeField]
+        private GameObject LootItemBubblePrefab;
+
+        [Space]
         [SerializeField]
         private List<ItemGroupVisualData> itemVisualDatas = new List<ItemGroupVisualData>();
         public IEnumerable<ItemGroupVisualData> ItemVisualDatas => itemVisualDatas;
@@ -21,6 +26,13 @@ namespace MO.Item
             {
                 ItemPerKey.Add(item.Id, item);
             }
+        }
+
+        public void LootObjectOnGround(string id, Vector3 position)
+        {
+            Debug.Log($"Create loot object on ground {id} -> {position}");
+            var newLoot = Instantiate(LootItemBubblePrefab, position, Quaternion.identity);
+            newLoot.GetComponent<LootItemBehaviour>().SetItem(GetItemVisualData(id));
         }
 
         public ItemGroupVisualData GetItemVisualData(string id) => ItemPerKey[id];

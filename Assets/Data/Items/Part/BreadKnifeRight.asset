@@ -17,3 +17,4 @@ MonoBehaviour:
   UseSpecificLayerOrder: 1
   LayerOrder: 110
   VisibleBodyParts: 
+  PresentationAngle: -40

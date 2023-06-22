@@ -13,13 +13,17 @@ namespace MO.Item
 
         public void SetItem(ItemGroupVisualData itemGroup)
         {
+            foreach (var sprite in centeredSprites)
+            {
+                sprite.Reset();
+            }
             for (int i = 0; i < itemGroup.items.Count; i++)
             {
                 if (i >= centeredSprites.Count)
                 {
                     break;
                 }
-                centeredSprites[i].SetSprite(itemGroup.items[i].Sprite, -anglePerItem[i]);
+                centeredSprites[i].SetSprite(itemGroup.items[i].Sprite, itemGroup.items[i].PresentationAngle);
             }
         }
 

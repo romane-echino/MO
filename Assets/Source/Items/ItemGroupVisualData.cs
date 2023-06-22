@@ -11,6 +11,9 @@ namespace MO.Item
 
         public List<ItemVisualData> items = new List<ItemVisualData>();
 
+        // If we need to override presentation angles for some object group ??
+        //public List<float> PresentationAngles = new List<float>() { };
+
         public AnimationAttackType AnimationAttackType;
 
         public bool ShootProjectile = false;

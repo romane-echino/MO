@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0125f93b212bd77429447fa8a0341b96, type: 3}
   m_Name: IronSwordVisualData
   m_EditorClassIdentifier: 
-  Id: 3
   Sprite: {fileID: 21300000, guid: 168e4ae903d9d514da6ce3d57ea766cd, type: 3}
   AnchorType: 3
   UseSpecificLayerOrder: 0
   LayerOrder: -75
   VisibleBodyParts: 0f000000
-  AnimationAttackType: 1
+  PresentationAngle: 30

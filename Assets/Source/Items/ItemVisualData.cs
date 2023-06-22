@@ -14,6 +14,9 @@ namespace MO.Item
         public bool UseSpecificLayerOrder = false;
         public int LayerOrder;
         public List<BodyPartType> VisibleBodyParts = new List<BodyPartType>();
+        
+        [Space]
+        public float PresentationAngle;
     }
 }
 
