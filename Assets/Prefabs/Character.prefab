@@ -1284,7 +1284,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -70
+  m_SortingOrder: 110
   m_Sprite: {fileID: 2006839908, guid: 9fb0704c8b951bd46861b136b670d169, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1501,7 +1501,7 @@ MonoBehaviour:
     LayerOrder: -75
   - Type: 4
     Transform: {fileID: 4857809472481278109}
-    LayerOrder: -75
+    LayerOrder: 115
 --- !u!114 &1865439280482190603
 MonoBehaviour:
   m_ObjectHideFlags: 0
